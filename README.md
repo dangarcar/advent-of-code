@@ -9,4 +9,4 @@ When a day day has two solutions is because the part 1 and part 2 solutions are 
 I haven't uploaded the inputs as mentioned in the [AoC web](https://adventofcode.com/2023/about)
 
 ## 2023
-![Image of all the problems done in my account in 2023](done.png)
+![Image of all the problems done in my account in 2023](2023/done.png)
