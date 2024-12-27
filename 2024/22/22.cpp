@@ -59,7 +59,7 @@ int main(int argc, char const *argv[]) {
     for(auto [k, v]: m) {
         ans = max(ans, v);
     }
-    cout << endl << ans << endl;
+    cout << "Part 2 answer: "  << ans << endl;
 
     return 0;
 }

@@ -152,12 +152,13 @@ int main(int argc, char const *argv[]) {
             lc = c;
         }
         
-        cout << input[i] << ' ' << best << endl;
+        //cout << input[i] << ' ' << best << endl;
         ans += nums[i] * best;
     }
 
-    auto dt = chrono::duration_cast<chrono::microseconds>(chrono::steady_clock::now() - start);
-    printf("\n%ld\n%.03fms\n", ans, dt.count() / 1000.0);
+    cout << "Part 2 answer: " << ans << endl;
+    //auto dt = chrono::duration_cast<chrono::microseconds>(chrono::steady_clock::now() - start);
+    //printf("\n%ld\n%.03fms\n", ans, dt.count() / 1000.0);
 
     return 0;
 }

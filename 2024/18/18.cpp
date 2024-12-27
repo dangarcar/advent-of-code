@@ -63,7 +63,7 @@ int main(int argc, char const *argv[]) {
             r = m;
     }
 
-    cout << bytes[r].second << ',' << bytes[r].first << endl;
+    cout << "Part 2 answer: " << bytes[r].second << ',' << bytes[r].first << endl;
 
     return 0;
 }

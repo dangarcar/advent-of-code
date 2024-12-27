@@ -59,7 +59,7 @@ int main(int argc, char const *argv[]) {
     ans += findXmas(board, false);
     ans += findXmas(boardTransposed, true);
     ans += findXmas(boardTransposed, false);
-    cout << ans << endl;
+    cout << "Part 2 answer: " << ans << endl;
 
     return 0;
 }

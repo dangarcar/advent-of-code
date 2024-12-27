@@ -27,7 +27,7 @@ char run(long a, long b, long c, const string& prog) {
             case 3:
                 if(a != 0) {
                     pc = op - 2;
-                    cout << a << ' ' << b << ' ' << c << endl;
+                    //cout << a << ' ' << b << ' ' << c << endl;
                 }
             break;
 
@@ -93,19 +93,19 @@ int main(int argc, char const *argv[]) {
         }
     }
 
-    cout << a << ' ' << b << ' ' << c << endl;
+    /*cout << a << ' ' << b << ' ' << c << endl;
     for(auto e: prog)
         cout << e << ' ';
-    cout << endl;
+    cout << endl;*/
 
     while(a != 0) {
         auto out = run(a, b, c, prog);
-        cout << out << endl;
+        //cout << out << endl;
         a /= 8;
     }
-    cout << endl;
+    //cout << endl;
 
-    cout << solve(prog, prog.size(), 0) << endl;
+    cout << "Part 2 answer: " << solve(prog, prog.size(), 0) << endl;
     
     return 0;
 }

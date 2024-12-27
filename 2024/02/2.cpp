@@ -32,21 +32,19 @@ int main(int argc, char const *argv[]) {
         nums.push_back(v);
     }
 
-    cout << endl;
+    //cout << endl;
 
     int ans = 0;
     for(auto& n: nums) {
-        
         for(int i=0; i<n.size(); ++i) {
             if(checkFor(n, i)) {
                 ans++; 
                 break;
             }
         }
-
     }
 
-    cout << ans << endl;
+    cout << "Part 2 answer: " << ans << endl;
 
     return 0;
 }

@@ -63,13 +63,13 @@ int main(int argc, char const *argv[]) {
                 if(dfs(i, j))
                     ways++;
 
-                cout << ways << endl;
+                //cout << ways << endl;
                 ans += ways;
             }
         }
     }
 
-    cout << ans << endl;
+    cout << "Part 2 answer: " << ans << endl;
 
     return 0;
 }

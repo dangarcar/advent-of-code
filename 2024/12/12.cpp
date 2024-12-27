@@ -105,7 +105,7 @@ int main(int argc, char const *argv[]) {
         ans += v[i].area * v[i].sides;
     }
 
-    cout << ans << endl;
+    cout << "Part 2 answer: " << ans << endl;
 
     return 0;
 }

@@ -42,12 +42,12 @@ int main(int argc, char const *argv[]) {
 
     long ans = 0;
     for(auto& s: tests) {
-        cout << s << ' ' << solve(s) << endl;
+        //cout << s << ' ' << solve(s) << endl;
 
         ans += solve(s);
     }
 
-    cout << ans << endl;
+    cout << "Part 2 answer: " << ans << endl;
 
     return 0;
 }

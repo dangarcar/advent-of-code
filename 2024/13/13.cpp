@@ -80,7 +80,7 @@ int main(int argc, char const *argv[]) {
         }
     }
 
-    cout << ans << endl;
+    cout << "Part 2 answer: " << ans << endl;
 
     return 0;
 }

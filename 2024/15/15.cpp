@@ -111,13 +111,13 @@ int main(int argc, char const *argv[]) {
         }
     }
 
-    for(int i=0; i<n; ++i) {
+    /*for(int i=0; i<n; ++i) {
         for(int j=0; j<2*n; ++j) {
             cout << board[IDX(i, j)];
         }
         cout << '\n';
     }
-    cout << endl;
+    cout << endl;*/
 
     int ans = 0;
     for(int i=0; i<n; ++i) {
@@ -127,7 +127,7 @@ int main(int argc, char const *argv[]) {
         }
     }
 
-    cout << ans << endl;
+    cout << "Part 2 answer: " << ans << endl;
 
     return 0;
 }

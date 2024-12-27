@@ -36,7 +36,7 @@ int main(int argc, char const *argv[]) {
         buf += e + ",";
     buf.resize(buf.size()-1);
 
-    cout << buf << ' ' << ans.size() << endl;
+    cout << "Part 2 answer: " << buf << endl;
 
     return 0;
 }

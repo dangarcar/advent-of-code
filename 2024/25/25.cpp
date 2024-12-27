@@ -43,9 +43,9 @@ int main(int argc, char const *argv[]) {
 
     for(auto& k: keys) {
         for(auto& l: locks) {
-            for(auto e: k) cout << e << ' ';
+            /*for(auto e: k) cout << e << ' ';
             cout << "-> ";
-            for(auto e: l) cout << e << ' ';
+            for(auto e: l) cout << e << ' ';*/
 
             bool comp = true;
             for(int i=0; i<5; ++i) {
@@ -55,12 +55,12 @@ int main(int argc, char const *argv[]) {
                 }
             }
 
-            cout << "- " << comp << endl;
+            //cout << "- " << comp << endl;
             ans += comp;
         }
     }
 
-    cout << ans << endl;
+    cout << "Answer: " << ans << endl;
 
     return 0;
 }

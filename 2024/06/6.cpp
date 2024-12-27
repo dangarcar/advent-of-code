@@ -89,7 +89,8 @@ int main(int argc, char const *argv[]) {
         }
     }
 
-    cout << ans1 << ' ' << ans2 << ' ' << maxL << endl;
+    cout << "Part 1 answer: " << ans1 << endl;
+    cout << "Part 2 answer: " << ans2 << endl;
 
     return 0;
 }

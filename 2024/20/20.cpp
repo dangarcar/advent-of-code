@@ -66,7 +66,7 @@ int dfs(int i, int j) {
 }
 
 int main(int argc, char const *argv[]) {
-    auto start = chrono::steady_clock::now();
+    //auto start = chrono::steady_clock::now();
 
     string buf;
     while(getline(cin, buf)) {
@@ -96,10 +96,10 @@ int main(int argc, char const *argv[]) {
     cout << dist[si][sj] << ' ' << dist[ti][tj] << endl;
 
     visited.assign(n, vector<bool>(n, false));
-    cout << dfs(si, sj) << endl;
+    cout << "Part 2 answer: " << dfs(si, sj) << endl;
 
-    auto t = chrono::duration_cast<chrono::milliseconds>(chrono::steady_clock::now() - start);
-    cout << t.count() << "ms" << endl;
+    //auto t = chrono::duration_cast<chrono::milliseconds>(chrono::steady_clock::now() - start);
+    //cout << t.count() << "ms" << endl;
 
     return 0;
 }

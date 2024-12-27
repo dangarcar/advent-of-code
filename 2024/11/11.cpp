@@ -82,7 +82,7 @@ int main(int argc, char const *argv[]) {
         ans += solve(to_string(nums[i]), 75);
     }
 
-    cout << ans << endl;
+    cout << "Part 2 answer: " << ans << endl;
 
     return 0;
 }

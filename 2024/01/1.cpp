@@ -29,7 +29,7 @@ int main(int argc, char const *argv[]) {
         ans1 += abs(v[i] - w[i]);
     }
 
-    cout << "1 Answer: " << ans1 << endl;
+    cout << "Part 1 answer: " << ans1 << endl;
 
     int ans2 = 0;
     for(auto [k, v]: m) {
@@ -37,7 +37,7 @@ int main(int argc, char const *argv[]) {
         ans2 += k*a*b;
     }
 
-    cout << "2 answer: " << ans2 << endl;
+    cout << "Part 2 answer: " << ans2 << endl;
 
     return 0;
 }

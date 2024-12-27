@@ -51,7 +51,7 @@ int main(int argc, char const *argv[]) {
         }
     }
 
-    for(int i=0; i<n; ++i) {
+    /*for(int i=0; i<n; ++i) {
         for(int j=0; j<n; ++j) {
             if(visited[i][j])
                 cout << '#';
@@ -59,9 +59,9 @@ int main(int argc, char const *argv[]) {
                 cout << board[i][j];
         }
         cout << endl;
-    }
+    }*/
 
-    cout << ans << endl;
+    cout << "Part 2 answer: " << ans << endl;
 
     return 0;
 }

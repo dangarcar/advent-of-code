@@ -47,7 +47,7 @@ int main(int argc, char const *argv[]) {
 
                 if(*beg == ')') {
                     if(multiply(s)) {
-                        cout << (enable? "  ": "    ") << s << endl;
+                        //cout << (enable? "  ": "    ") << s << endl;
                         if(enable)
                             ans += multiply(s);
                     }
@@ -57,7 +57,7 @@ int main(int argc, char const *argv[]) {
         }
     }
 
-    cout << ans << endl;
+    cout << "Part 2 answer: " << ans << endl;
 
     return 0;
 }

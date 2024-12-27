@@ -49,9 +49,10 @@ int main(int argc, char const *argv[]) {
         vel.push_back(v);
     }
 
-    int ans = INT_MAX;
+    int score = INT_MAX;
+    int ans = 0;
     int t = 1;
-    while(true) {
+    while(t < nx*ny) {
         vector<string> b(ny, string(nx, '.'));
         int dst = 0;
         for(int i=0; i<pos.size(); ++i) {
@@ -62,17 +63,15 @@ int main(int argc, char const *argv[]) {
             dst += totalDst(i);
         }
 
-        if(dst < ans) {
-            ans = dst;
-
-            for(auto& s: b)
-                cout << s << endl;
-            cout << ans << ' ' << t << endl;
-            cout << endl;
+        if(dst < score) {
+            score = dst;
+            ans = t;
         }
 
         t++;
     }
+
+    cout << "Part 2 answer: " << ans << endl;
 
     return 0;
 }

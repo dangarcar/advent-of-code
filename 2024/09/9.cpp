@@ -51,7 +51,8 @@ int main(int argc, char const *argv[]) {
         }
     }
 
-    cout << s << endl << ans << endl;
+    //cout << s << endl;
+    cout << "Part 2 answer: "  << ans << endl;
 
     return 0;
 }
