@@ -1,23 +1,36 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+//WTF IS THIS???
+//Honestly I looked up what the tree looked like on Reddit before coming up with this solution, because it was a very vague description
+
 struct vec2 {
     int x, y;
 };
 
-ostream& operator<<(ostream& os, const vec2& v) {
-    os << v.x << ',' << v.y;
-    return os;
+int ny = 103, nx = 101;
+
+vector<vec2> pos;
+
+int sqrDst(vec2 a, vec2 b) {
+    return (a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y);
 }
 
-int ny = 103, nx = 101;
+int totalDst(int i) {
+    int res = 0;
+    auto p = pos[i];
+    for(auto q: pos) {
+        res += sqrDst(p, q);
+    }
+
+    return res;
+}
 
 int main(int argc, char const *argv[]) {
     string buf;
-    vector<vec2> pos;
     vector<vec2> vel;
     while(getline(cin, buf)) {
-        if(buf.empty()) continue;
+        if(buf.empty()) break;
 
         stringstream ss;
         ss << buf;
@@ -36,31 +49,30 @@ int main(int argc, char const *argv[]) {
         vel.push_back(v);
     }
 
-    for(int t=0; t<100; ++t) {        
+    int ans = INT_MAX;
+    int t = 1;
+    while(true) {
+        vector<string> b(ny, string(nx, '.'));
+        int dst = 0;
         for(int i=0; i<pos.size(); ++i) {
             pos[i].x = (pos[i].x + vel[i].x + 2*nx) % nx;
             pos[i].y = (pos[i].y + vel[i].y + 2*ny) % ny;
+            
+            b[pos[i].y][pos[i].x] = 'R';
+            dst += totalDst(i);
         }
-    }
 
-    int a = 0, b = 0, c = 0, d = 0;
-    for(auto p: pos) {
-        if(p.x < nx/2) {
-            if(p.y < ny/2)
-                a++;
-            if(p.y > ny/2)
-                b++;
-        }
-        if(p.x > nx/2) {
-            if(p.y < ny/2)
-                c++;
-            if(p.y > ny/2)
-                d++;
-        }
-    }
+        if(dst < ans) {
+            ans = dst;
 
-    int ans = a * b * c * d;
-    cout << ans << endl;
+            for(auto& s: b)
+                cout << s << endl;
+            cout << ans << ' ' << t << endl;
+            cout << endl;
+        }
+
+        t++;
+    }
 
     return 0;
 }

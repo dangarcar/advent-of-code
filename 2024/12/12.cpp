@@ -1,38 +1,64 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define NONE 0
+#define UP 8
+#define LEFT 4
+#define DOWN 2
+#define RIGHT 1
+
 vector<string> board;
 vector<vector<bool>> visited;
+vector<vector<int>> directions, regions;
 int n;
+int id;
 
 int incI[] = { 0,0,1, -1 };
 int incJ[] = { 1,-1,0,0 };
+int dirs[] = { RIGHT, LEFT, DOWN, UP };
 
 struct region {
-    int area, perimeter;
+    int area, sides;
 };
 
-region dfs(int i, int j) {
+int areaDirsDfs(int i, int j) {
     visited[i][j] = true;
-    region r;
-    r.area = 1;
-    r.perimeter = 4;
+    regions[i][j] = id;
+    int area = 1;
 
     for(int k=0; k<4; ++k) {
         int ni = i + incI[k], nj = j + incJ[k];
         if(0 <= ni && ni < n
         && 0 <= nj && nj < n
-        && board[i][j] == board[ni][nj]) {
-            r.perimeter--;   
+        && board[i][j] == board[ni][nj]) { 
             if(!visited[ni][nj]) {
-                auto tmp = dfs(ni, nj);
-                r.area += tmp.area;
-                r.perimeter += tmp.perimeter;
+                area += areaDirsDfs(ni, nj);
             }
+        } else {
+            directions[i][j] |= dirs[k];
         }
     }
 
-    return r;
+    return area;
+}
+
+void regionDfs(int i, int j, int k) {
+    visited[i][j] = true;
+
+    int ti = i + incI[k], tj = j + incJ[k];
+    if(0 <= ti && ti < n
+    && 0 <= tj && tj < n
+    && board[i][j] == board[ti][tj])
+        return;
+    
+    int ni = i, nj = j;
+    if(incI[k] == 0)
+        ni++;
+    else
+        nj++;
+
+    if(ni < n && nj < n && (directions[ni][nj] & dirs[k]) && board[i][j] == board[ni][nj])
+        regionDfs(ni, nj, k);
 }
 
 int main(int argc, char const *argv[]) {
@@ -45,15 +71,38 @@ int main(int argc, char const *argv[]) {
     n = board.size();
 
     visited.assign(n, vector<bool>(n, false));
-    int ans = 0;
+    directions.assign(n, vector<int>(n, NONE));
+    regions.assign(n, vector<int>(n, -1));
+
+    vector<region> v;
+    id = 0;
 
     for(int i=0; i<n; ++i) {
         for(int j=0; j<n; ++j) {
             if(!visited[i][j]) {
-                auto r = dfs(i, j);
-                ans += r.area * r.perimeter;
+                auto area = areaDirsDfs(i, j);
+                v.push_back({area, 0});
+                id++;
             }
         }
+    }
+    for(int k=0; k<4; ++k) {
+        visited.assign(n, vector<bool>(n, false));
+
+        for(int i=0; i<n; ++i) {
+            for(int j=0; j<n; ++j) {
+                if((directions[i][j] & dirs[k]) && !visited[i][j]) {
+                    regionDfs(i, j, k);
+
+                    v[regions[i][j]].sides++;
+                }
+            }
+        }
+    }
+
+    int ans = 0;
+    for(int i=0; i<v.size(); ++i) {
+        ans += v[i].area * v[i].sides;
     }
 
     cout << ans << endl;

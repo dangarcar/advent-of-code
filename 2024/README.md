@@ -1,9 +1,11 @@
 # My advent of code 2024
 
-My solutions to the Advent of Code of 2024 in C++. I don't have any snippet for the input nor anything like that.
+My solutions to the Advent of Code of 2024 in C++.
 
 Some of the days have only the solutions of part 2, as I wrote it over the part 1 solutions.
 
-When a day day has two solutions is because the part 1 and part 2 solutions are very different, and *usually (not always)* the code for part two is better than the part 1.
+Day 24 is only a helper to deduce the answer manually, as it was easier to do by hand than automatically.
 
 I haven't uploaded the inputs as mentioned in the [AoC web](https://adventofcode.com/2024/about)
+
+![Image of all the problems done in my account](done.png)
