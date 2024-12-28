@@ -31,13 +31,13 @@ def main():
 
     days.sort(key=lambda x: x['input'])    
 
-    for e in days:
+    """for e in days:
         i = e['exe'].split('/')[0]
-        x = subprocess.getoutput(f'g++ -std=c++20 -O2 {e['cpp']} -o {e['exe']}')
+        x = subprocess.getoutput(f'g++ -std=c++20 -O3 {e['cpp']} -o {e['exe']}')
         if x != "":
             print("ERROR IN DAY " + i)
         else:
-            print(f"DAY {i} COMPILED")        
+            print(f"DAY {i} COMPILED")"""
     
     t = []
     for e in days:
@@ -57,7 +57,7 @@ def main():
     per = [(x/total, i) for i, x in enumerate(t)]
     per.sort(reverse=True)
     for i, p in enumerate(per):
-        print(f'{"{:02}".format(i+1)}º: day {"{:02}".format(p[1]+1)} -> {"{:.2f}".format(p[0])}%\t\t{"{:.2f}".format(1000*t[p[1]])}ms')
+        print(f'{"{:02}".format(i+1)}º: day {"{:02}".format(p[1]+1)} -> {"{:.2f}".format(100*p[0])}%\t\t{"{:.2f}".format(1000*t[p[1]])}ms')
         
 
 if __name__ == "__main__":
