@@ -1,8 +1,5 @@
 #include <bits/stdc++.h>
-#include <string>
 using namespace std;
- 
-//ANOTHER BRUTE FORCE, BUT IT KEEPS WORKING
 
 vector<long> v;
 long tgt;
@@ -14,7 +11,15 @@ bool possible(long last, int i, int n) {
 
     bool a = possible(last * v[i], i + 1, n);
     bool b = possible(last + v[i], i + 1, n);
-    bool c = possible(stol( to_string(last) + to_string(v[i]) ), i + 1, n);
+    
+    long esp = 1;
+    long t = v[i];
+    while(t) {
+        t /= 10L;
+        esp *= 10;
+    }
+
+    bool c = possible(last*esp + v[i], i + 1, n);
 
     return a || b || c;
 }

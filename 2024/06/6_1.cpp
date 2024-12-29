@@ -5,13 +5,20 @@ int incX[] = {0, 1, 0, -1 };
 int incY[] = {-1, 0, 1, 0 };
 
 vector<string> board;
+vector<vector<bool>> visited;
 int n;
 
-int pathLenght(int i, int j) {
+int begX, begY;
+int maxL = 0;
+
+int pathLenght() {
+    int i = begY, j = begX;
     int v = 0;
     int len = 0;
 
     while(len <= n*n) {
+        visited[i][j] = true;
+
         int ni = i + incY[v], nj = j + incX[v];
         if(0 > ni || ni >= n || 0 > nj || nj >= n)
             return len;
@@ -40,34 +47,33 @@ int main(int argc, char const *argv[]) {
         }
     }
 
-    int begI, begJ;
     n = board.size();
+
+    visited.assign(n, vector<bool>(n, false));
 
     for(int i=0; i<n; ++i) {
         for(int j=0; j<n; ++j) {
             if(board[i][j] == '^') {
-                begI = i;
-                begJ = j;
+                begX = j;
+                begY = i;
                 break;
             }
         }
     }
 
-    int ans = 0;
+    maxL = 1 << 30;
+    maxL = pathLenght();
+
+    int ans1 = 0;
     for(int i=0; i<n; ++i) {
         for(int j=0; j<n; ++j) {
-            if(board[i][j] == '.') {
-                board[i][j] = '#';
-
-                if(pathLenght(begI, begJ) == -1)
-                    ans++;
-
-                board[i][j] = '.';
+            if(visited[i][j]) {
+                ans1++;
             }
         }
     }
 
-    cout << "Part 2 answer: " << ans << endl;
+    cout << "Part 1 answer: " << ans1 << endl;
 
     return 0;
 }

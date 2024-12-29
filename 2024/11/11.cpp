@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
-#include <string>
 using namespace std;
+
+#define N 75
 
 string multiply(string num1, string num2) {
     int len1 = num1.size();
@@ -49,26 +50,26 @@ string multiply(string num1, string num2) {
     return s;
 }
 
-map<pair<string,int>, long> cache;
+unordered_map<string, long> cache[N+1];
 
 long solve(string e, int t) {
     if(t == 0)
         return 1;
 
-    if(cache.count({e, t})) {
-        return cache[{e, t}];
+    if(cache[t].contains(e)) {
+        return cache[t][e];
     }
     else if(e == "0") {
-        return cache[{e,t}] = solve("1", t - 1);
+        return cache[t][e] = solve("1", t - 1);
     }
     else if(e.size() % 2 == 0) {
         string s1(e.begin(), e.begin() + (e.size()/2));
         string s2(e.begin() + (e.size()/2), e.end());
 
-        return cache[{e,t}] = (solve(s1, t - 1) + solve(multiply(s2, "1"), t - 1));
+        return cache[t][e] = (solve(s1, t - 1) + solve(multiply(s2, "1"), t - 1));
     }
 
-    return cache[{e,t}] = solve(multiply(e, "2024"), t - 1);
+    return cache[t][e] = solve(multiply(e, "2024"), t - 1);
 }
 
 int main(int argc, char const *argv[]) {
@@ -79,7 +80,7 @@ int main(int argc, char const *argv[]) {
 
     long ans = 0;
     for(int i=0; i<nums.size(); ++i) {
-        ans += solve(to_string(nums[i]), 75);
+        ans += solve(to_string(nums[i]), N);
     }
 
     cout << "Part 2 answer: " << ans << endl;

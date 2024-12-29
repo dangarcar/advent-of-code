@@ -66,7 +66,7 @@ int dfs(int i, int j) {
 }
 
 int main(int argc, char const *argv[]) {
-    //auto start = chrono::steady_clock::now();
+    auto start = chrono::steady_clock::now();
 
     string buf;
     while(getline(cin, buf)) {
@@ -76,8 +76,8 @@ int main(int argc, char const *argv[]) {
     }
 
     n = board.size();
-    dist.assign(n*n, vector<int>(n*n, INF));
-    for(int u=0; u<n*n; ++u)
+    dist.assign(n, vector<int>(n, INF));
+    for(int u=0; u<n; ++u)
         dist[u][u] = 0;
 
     for(int i=1; i<n-1; ++i) {
@@ -93,13 +93,13 @@ int main(int argc, char const *argv[]) {
     }
 
     bfs();
-    cout << dist[si][sj] << ' ' << dist[ti][tj] << endl;
-
     visited.assign(n, vector<bool>(n, false));
-    cout << "Part 2 answer: " << dfs(si, sj) << endl;
+    int ans = dfs(si, sj);
+    //cout << dist[si][sj] << ' ' << dist[ti][tj] << endl;
+    cout << "Part 2 answer: " << ans << endl;
 
-    //auto t = chrono::duration_cast<chrono::milliseconds>(chrono::steady_clock::now() - start);
-    //cout << t.count() << "ms" << endl;
+    auto t = chrono::duration_cast<chrono::milliseconds>(chrono::steady_clock::now() - start);
+    cout << t.count() << "ms" << endl;
 
     return 0;
 }
