@@ -11,23 +11,16 @@ long op(long a) {
     return a;
 }
 
+constexpr int hashKey(int a, int b, int c, int d) {
+    return ((a+10) << 15) | ((b+10) << 10) | ((c+10) << 5) | (d+10);
+}
+
+constexpr int MAX_HASH = hashKey(9, 9, 9, 9) + 1;
+array<int, MAX_HASH> arr;
+bitset<MAX_HASH> b;
+
 vector<vector<int>> seq;
 vector<vector<int>> diff;
-
-struct key {
-    int8_t a, b, c, d;
-
-    key(int a, int b, int c, int d): a(a), b(b), c(c), d(d) {}
-    auto operator<=>(const key&) const = default;
-};
-
-template<> struct std::hash<key> {
-    size_t operator()(const key& k) const {
-        return hash<long>()( *((long*)&k) );
-    }
-};
-
-unordered_map<key, long> m;
 
 int main(int argc, char const *argv[]) {
     int a;
@@ -45,19 +38,19 @@ int main(int argc, char const *argv[]) {
 
 
     for(int i=0; i<seq.size(); ++i) {
-        unordered_set<key> s;
+        b.reset();
         for(int j=4; j<=SECRETS; ++j) {
-            key k( diff[i][j-4], diff[i][j-3], diff[i][j-2], diff[i][j-1] );
-            if(s.count(k) == 0) {
-                s.insert(k);
-                m[k] += seq[i][j] % 10;
+            int k = hashKey(diff[i][j-4], diff[i][j-3], diff[i][j-2], diff[i][j-1] );
+            if(!b[k]) {
+                b[k] = true;
+                arr[k] += seq[i][j] % 10;
             }
         }
     }
 
-    long ans = 0;
-    for(auto [k, v]: m) {
-        ans = max(ans, v);
+    int ans = 0;
+    for(int i=0; i<MAX_HASH; ++i) {
+        ans = max(ans, arr[i]);
     }
     cout << "Part 2 answer: "  << ans << endl;
 

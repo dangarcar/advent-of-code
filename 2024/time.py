@@ -38,7 +38,7 @@ def main():
             print("ERROR IN DAY " + i)
         else:
             print(f"DAY {i} COMPILED")
-    
+
     t = []
     for e in days:
         i = e['exe'].split('/')[0]
@@ -58,7 +58,7 @@ def main():
     per.sort(reverse=True)
     for i, p in enumerate(per):
         if(t[p[1]] > 1/100):
-            print(f'{"{:02}".format(i+1)}º: day {"{:02}".format(p[1]+1)} -> {"{:.2f}".format(100*p[0])}%\t\t{"{:.2f}".format(1000*t[p[1]])}ms')
+            print(f'{"{:01}".format(i+1)}º: day {"{:02}".format(p[1]+1)} -> {"{:.2f}".format(100*p[0])}%\t\t{"{:.2f}".format(1000*t[p[1]])}ms')
         
 
 if __name__ == "__main__":
