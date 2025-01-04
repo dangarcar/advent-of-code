@@ -1,5 +1,5 @@
 """
-Program to track the time it takes to solve all AoC part2, except for day 24 as it was done manually
+Program to track the time it takes to solve all AoC part 2
 """
 
 import os
@@ -12,8 +12,6 @@ def main():
     for dir in os.listdir("."):
         try:
             i = int(dir) # to throw error when needed
-            if i == 24:
-                raise ValueError("Day 24")
 
             cpp = [f for f in os.listdir(dir) if f.endswith(".cpp")]
             cpp.sort(key=lambda x: len(x))
