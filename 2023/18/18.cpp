@@ -31,9 +31,9 @@ int main(int argc, char const *argv[]) {
         coords.push_back(make_pair(x,y));
     }
 
-    for(auto [a,b]: coords) {
+    /*for(auto [a,b]: coords) {
         cout << a << ',' << b << '\n';
-    }
+    }*/
 
     long ans = 0;
     auto sz = coords.size();
@@ -43,7 +43,7 @@ int main(int argc, char const *argv[]) {
         ans += a*d - b*c;
     }
 
-    cout << abs(ans/2) + l/2 +1 << '\n';
+    cout << "Part 2 answer: " << abs(ans/2) + l/2 +1 << '\n';
 
     return 0;
 }

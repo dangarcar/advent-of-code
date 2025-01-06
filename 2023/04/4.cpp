@@ -1,9 +1,4 @@
-#include <iostream>
-#include <sstream>
-#include <vector>
-#include <set>
-#include <algorithm>
-#include <map>
+#include <bits/stdc++.h>
 using namespace std;
 
 int main() {
@@ -48,7 +43,7 @@ int main() {
         total += e.second;
     }
     
-    cout << total << '\n';
+    cout << "Part 2 answer: " << total << '\n';
 
     return 0;
 }

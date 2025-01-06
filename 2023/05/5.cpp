@@ -104,11 +104,11 @@ int main(int argc, char const *argv[]) {
     }
 
     for(auto e: tmp) {
-        cout << e.first << ' ';
+        //cout << e.first << ' ';
         ans = min(ans, e.first);
     }
 
-    cout << "\n\n\n" << ans << '\n';
+    cout << "Part 2 answer: " << ans << '\n';
 
     return 0;
 }

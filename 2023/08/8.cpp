@@ -35,8 +35,6 @@ int main(int argc, char const *argv[]) {
         cout << a << ' ' << p.first << ' ' << p.second << '\n';
     }*/
 
-    cout << "Input done\n";
-
     vector<string> currs;    
     for(auto [s,g]: m) {
         if(s[2] == 'A')
@@ -61,15 +59,12 @@ int main(int argc, char const *argv[]) {
         sols.push_back(step);
     }
 
-    for(auto s:sols)
-        cout << s << ' ';
-    cout << '\n';
-
     auto ans = accumulate(sols.begin(), sols.end(), 1L, [](long a, long b){
         long t = gcd(a, b);
         return t? (a/t * b) : 0;
     });
-    cout << ans << '\n';
+
+    cout << "Part 2 answer: " << ans << '\n';
 
     return 0;
 }

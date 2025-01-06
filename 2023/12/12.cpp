@@ -1,45 +1,55 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<int> groups;
+struct Data {
+    long i, cnt, perm;
+};
 
-long arrangements(const string str, string curr) {
-    long ans = 0;
+long arrangements(const string str, const vector<int>& groups) {
+    map<pair<long, long>, long> m;
+    m[make_pair(0,0)] = 1;
 
-    for(int i=curr.size(); i<str.size(); ++i) {
-        if(str[i] == '?') {
-            ans += arrangements(str, curr+'#');
-            ans += arrangements(str, curr+'.');
-            break;
-        }
-        curr += str[i];
-    }
+    for(auto c: str) {
+        vector<Data> next;
+        for(auto [g, perm]: m) {
+            auto [i, cnt] = g;
 
-    if(curr.size() == str.size()) {
-        int n=0, currIdx=0;
-        for(int i=0; i<curr.size(); ++i) {
-            if(curr[i] == '#') {
-                n++;
-            } else if(n != 0) {
-                if(n != groups[currIdx])
-                    return ans;
-                
-                currIdx++;
-                n = 0;
+            if(c != '#') {
+                if(cnt == 0) {
+                    next.push_back({i, cnt, perm});
+                } else if(cnt == groups[i]) {
+                    next.push_back({i+1, 0, perm});
+                }
+            }
+            if(c != '.') {
+                if(i < groups.size() && cnt < groups[i]) {
+                    next.push_back({i, cnt+1, perm});
+                }
             }
         }
 
-        if(n != 0) {
-            if(n != groups[currIdx])
-                return ans;
-            ++currIdx;
+        m.clear();
+
+        for(auto d: next) {
+            m[make_pair(d.i, d.cnt)] += d.perm;
         }
+    }
 
-        if(currIdx != groups.size())
-            return ans;
+    long ans = 0;
+    for(auto [g, perm]: m) {
+        auto [i, cnt] = g;
+        if(i == groups.size() || (i == groups.size()-1 && cnt == groups[i])) {
+            ans += perm;
+        }
+    }
+    return ans;
+}
 
-        //cout << curr << '\n';
-        ++ans;
+string unfold(const string& str) {
+    string ans(str);
+    for(int i=0; i<4; ++i) {
+        ans += '?';
+        ans += str;
     }
 
     return ans;
@@ -52,26 +62,31 @@ int main(int argc, char const *argv[]) {
     long total = 0;
 
     while(getline(cin, buf)) {
-        groups.clear();
         vector<int> v;
         string str;
         istringstream iss(buf);
         iss >> str;
         int a;
         while(iss >> a) {
-            groups.push_back(a);
+            v.push_back(a);
             if(iss.peek() == ',')
                 iss.ignore();
         }
 
-        auto ar = arrangements(str, "");
+        str = unfold(str);
+        vector<int> groups;
+        for(int i=0; i<5; ++i) {
+            groups.insert(groups.begin(), v.begin(), v.end());
+        }
+        auto ar = arrangements(str, groups);
+
         total += ar;
 
-        for(auto e:groups) cout << e << ' ';
-        cout << str << " Finished line " << ++number << " -> " << ar <<'\n';
+        //for(auto e:groups) cout << e << ' ';
+        //cout << str << " Finished line " << ++number << " -> " << ar <<'\n';
     }
 
-    cout << '\n' << total << '\n';
+    cout << "Part 2 answer: " << total << '\n';
 
     return 0;
 }

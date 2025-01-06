@@ -111,7 +111,7 @@ int main(int argc, char const *argv[]) {
         if(mod == t%sz) 
             n = a;
     }
-    cout << '\n' << n << '\n';
+    cout << "Part 2 answer: " << n << '\n';
 
     return 0;
 }

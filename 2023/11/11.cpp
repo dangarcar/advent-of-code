@@ -62,5 +62,5 @@ int main(int argc, const char* argv[]) {
         }
     }
 
-    cout << '\n' << total << '\n';
+    cout << "Part 2 answer: " << total << '\n';
 } 

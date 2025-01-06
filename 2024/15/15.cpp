@@ -1,9 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define IDX(i, j) (i*2*n + j)
-
-string board, newBoard;
+vector<string> board;
 vector<vector<bool>> visited;
 
 int incI[] = {0, 0, 1, -1};
@@ -17,15 +15,15 @@ bool canMove(int i, int j, int k) {
     visited[i][j] = true;
 
     int ni = i + incI[k], nj = j + incJ[k];
-    if(board[IDX(ni, nj)] == '.')
+    if(board[ni][nj] == '.')
         return true;
-    if(board[IDX(ni, nj)] == '#')
+    if(board[ni][nj] == '#')
         return false;
     else {
-        if(board[IDX(ni, nj)] == '[') {
+        if(board[ni][nj] == '[') {
             return canMove(ni, nj, k) && canMove(ni, nj + 1, k);
         }
-        if(board[IDX(ni, nj)] == ']') {
+        if(board[ni][nj] == ']') {
             return canMove(ni, nj - 1, k) && canMove(ni, nj, k);
         }
     }
@@ -34,28 +32,34 @@ bool canMove(int i, int j, int k) {
     return true;
 };
 
+void move(int i, int j, int k) {
+    if(board[i][j] == '.' || visited[i][j])
+        return;
+
+    visited[i][j] = true;
+    int ni = i + incI[k], nj = j + incJ[k];
+    
+    if(board[ni][nj] == '[')
+        move(ni, nj + 1, k);
+    if(board[ni][nj] == ']')
+        move(ni, nj - 1, k);
+    
+    move(ni, nj, k);
+
+    board[ni][nj] = board[i][j];
+    board[i][j] = '.';
+}
+
 int main(int argc, char const *argv[]) {
     string buf;
     while(getline(cin, buf)) {
         if(buf.empty())
             break;
         
-        board += buf;
+        board.push_back(buf);
         n = buf.size();
     }
 
-    string s;
-    for(auto c: board) {
-        switch(c) {
-            case '.': s += ".."; break;
-            case '@': s += "@."; break;
-            case 'O': s += "[]"; break;
-            case '#': s += "##"; break;
-        }
-    }
-    board = std::move(s);
-
-    newBoard = string(n*2*n, ' ');
     vector<int> moves;
     while(getline(cin, buf)) {
         for(auto c: buf) {
@@ -72,9 +76,16 @@ int main(int argc, char const *argv[]) {
         }
     }
 
+    for(auto& v: board) {
+        v = regex_replace(v, regex("\\."), "..");
+        v = regex_replace(v, regex("\\#"), "##");
+        v = regex_replace(v, regex("\\@"), "@.");
+        v = regex_replace(v, regex("\\O"), "[]");
+    }
+
     for(int i=0; i<n; ++i) {
         for(int j=0; j<2*n; ++j) {
-            if(board[IDX(i, j)] == '@') {
+            if(board[i][j] == '@') {
                 x = j;
                 y = i;
             }
@@ -84,45 +95,18 @@ int main(int argc, char const *argv[]) {
     for(auto k: moves) {
         visited.assign(n, vector<bool>(2*n, false));
         if(canMove(y, x, k)) {
-            memset(newBoard.data(), ' ', n*2*n);
+            visited.assign(n, vector<bool>(2*n, false));
+            move(y, x, k);
+            
             x += incJ[k];
             y += incI[k];
-            
-            for(int i=0; i<n; ++i) {
-                for(int j=0; j<2*n; ++j) {
-                    int ni = i + incI[k], nj = j + incJ[k];
-                    if(0 <= ni && ni < n && 0 <= nj && nj < 2*n) {
-                        if(visited[i][j])
-                            newBoard[IDX(ni, nj)] = board[IDX(i, j)];
-                        else if(visited[ni][nj])
-                            newBoard[IDX(ni, nj)] = '.';
-                    }
-                }
-            }
-            
-            for(int i=0; i<n; ++i) {
-                for(int j=0; j<2*n; ++j) {
-                    if(newBoard[IDX(i, j)] == ' ')
-                        newBoard[IDX(i, j)] = board[IDX(i, j)];
-                }
-            }
-
-            swap(board, newBoard);
-        }
+        }    
     }
-
-    /*for(int i=0; i<n; ++i) {
-        for(int j=0; j<2*n; ++j) {
-            cout << board[IDX(i, j)];
-        }
-        cout << '\n';
-    }
-    cout << endl;*/
 
     int ans = 0;
     for(int i=0; i<n; ++i) {
         for(int j=0; j<2*n; ++j) {
-            if(board[IDX(i, j)] == '[')
+            if(board[i][j] == '[')
                 ans += 100*i + j;
         }
     }

@@ -49,14 +49,14 @@ int main(int argc, char const *argv[])
 
                 if(nums.size() == 2) {
                     int n = nums[0] * nums[1];
-                    cout << nums[0] << '*' << nums[1] << '=' << n << '\n';
+                    //cout << nums[0] << '*' << nums[1] << '=' << n << '\n';
                     total += n;
                 }
             }
         }
     }
 
-    cout << '\n' << total << '\n';
+    cout << "Part 2 answer: " << total << '\n';
 
     return 0;
 }

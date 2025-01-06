@@ -28,8 +28,8 @@ struct Data {
 
 using info = pair<int, Data>;
 
-bool operator<(const info& a, const info& b) {
-    return a.first < b.first;
+int operator<=>(const info& a, const info& b) {
+    return a.first - b.first;
 }
 
 int main(int argc, char const *argv[]) {
@@ -117,7 +117,7 @@ int main(int argc, char const *argv[]) {
         }
     }
 
-    cout << '\n' << ans << '\n';
+    cout << "Part 2 answer: " << ans << '\n';
     
     return 0;
 }

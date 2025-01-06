@@ -116,8 +116,6 @@ int main(int argc, char const *argv[]) {
         map.insert(make_pair(Hand{hand}, bid));   
     }
 
-    cout << '\n';
-
     long total=0;
     long i=1;
     for(auto [h, b]: map) {
@@ -127,7 +125,7 @@ int main(int argc, char const *argv[]) {
         ++i;
     }
 
-    cout << total << '\n';
+    cout << "Part 2 answer: " << total << '\n';
 
     return 0;
 }

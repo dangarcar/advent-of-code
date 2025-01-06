@@ -67,9 +67,9 @@ int main(int argc, char const *argv[]) {
                 }
 
                 long n = STEPS/R;
-                cout << n << '\n';
+                //cout << n << '\n';
                 long ans = (n+1)*(n+1)*odd + n*n*even - (n+1)*odd_corner + n*even_corner;
-                cout << ans << '\n';
+                cout << "Part 2 answer: " << ans << '\n';
             }
         }
     }

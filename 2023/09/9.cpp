@@ -38,6 +38,7 @@ int main(int argc, char const *argv[]) {
         ans += next(v);
     }
     
-    cout << ans << '\n';
+    cout << "Part 2 answer: " << ans << '\n';
+    
     return 0;
 }

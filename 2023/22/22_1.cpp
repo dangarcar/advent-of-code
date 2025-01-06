@@ -1,21 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-/*
-It's brute force but only needs 6 min in my WSL2 instance because of some little optimizations
-*/
-
 struct Brick {
     long x1,y1,z1;
     long x2,y2,z2;
-};
-
-struct counting_iterator {
-    size_t count;
-    counting_iterator& operator++() { ++count; return *this; }
-
-    struct black_hole { void operator=(int) {} };
-    black_hole operator*() { return black_hole(); }
 };
 
 vector<Brick> bricks;
@@ -49,8 +37,8 @@ int main(int argc, char const *argv[]) {
         return a.z1 < b.z1;
     });
 
-    vector<vector<int>> adj(sz);
-    vector<vector<int>> len(sz);
+    vector<set<int>> adj(sz);
+    vector<set<int>> s(sz);
 
     for(int i=0; i<sz; ++i) {
         while(1) {
@@ -58,8 +46,7 @@ int main(int argc, char const *argv[]) {
             for(int j=0; j<i; ++j) {
                 if(isOver(bricks[i], bricks[j])) {
                     over = true;
-                    len[i].push_back(j);
-                    adj[j].push_back(i);
+                    adj[i].insert(j);
                 }
             }
 
@@ -70,31 +57,18 @@ int main(int argc, char const *argv[]) {
         }
     }
 
-    vector<int> dist(sz, -1);
-
     long ans = 0;
     for(int i=0; i<sz; ++i) {
-        queue<int> q;
-        set<int> visited;
-        visited.insert(i);
-        q.push(i);
-
-        while(!q.empty()) {
-            auto e = q.front();
-            q.pop();
-
-            for(auto j: adj[e]) {
-                auto a = set_intersection(visited.begin(), visited.end(), len[j].begin(), len[j].end(), counting_iterator()).count;
-                if(a == len[j].size()) {
-                    dist[j] = visited.size();
-                    visited.insert(j);
-                    q.push(j);
-                }
+        bool needed = false;
+        for(int j=i+1; j<sz; ++j) {
+            if(adj[j].size() == 1 && adj[j].count(i)) {
+                needed = true;
+                break;
             }
         }
 
-        ans += max(0UL, visited.size()-1);
-        cout << i << ' ' << ans << '\n';
+        if(!needed) 
+            ans++;
     }
     cout << sz << '\n';
     cout << ans << '\n';

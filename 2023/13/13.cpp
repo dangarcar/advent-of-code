@@ -8,11 +8,6 @@ int main(int argc, char const *argv[]) {
     
     while(getline(cin, str)) {
         if(str.empty()) {
-            cout << '\n';
-            for(auto s: v) {
-                cout << s << '\n';
-            }
-
             for(int i=0; i+1<v[0].size();  ++i) {
                 int smudge = 0;
                 for(int j=0 ;; ++j) {
@@ -30,7 +25,7 @@ int main(int argc, char const *argv[]) {
                 }
 
                 if(smudge == 1) {
-                    cout << i+1 << '\n';
+                    //cout << i+1 << '\n';
                     total += i+1;
                 }
             }
@@ -52,7 +47,7 @@ int main(int argc, char const *argv[]) {
                 }
 
                 if(smudge == 1) {
-                    cout << 100*(i+1) << '\n';
+                    //cout << 100*(i+1) << '\n';
                     total += 100*(i+1);
                 }
             }
@@ -63,7 +58,7 @@ int main(int argc, char const *argv[]) {
         }
     }
 
-    cout << '\n' << total << '\n';
+    cout << "Part 2 answer: " << total << '\n';
 
     return 0;
 }

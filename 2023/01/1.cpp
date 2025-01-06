@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-string numbers[] = {
+string names[] = {
     "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"
 };
 
@@ -20,8 +20,8 @@ int main(int argc, char const *argv[]){
                 r = str[i] - '0';
             } else {
                 for(int j=0; j<9; ++j) {
-                    size_t szN = numbers[j].length();
-                    if(strncmp(numbers[j].c_str(), str.c_str() + i, szN) == 0) {
+                    size_t szN = names[j].length();
+                    if(strncmp(names[j].c_str(), str.c_str() + i, szN) == 0) {
                         if(l == -1) {
                             l = j+1;
                         }
@@ -31,12 +31,12 @@ int main(int argc, char const *argv[]){
             }
         }
 
-        cout << l << ' ' << r << '\n';
+        //cout << l << ' ' << r << '\n';
 
         total += l*10+r;
     }
 
-    cout << total << '\n';
+    cout << "Part 2 answer: " << total << '\n';
 
     return 0;
 }

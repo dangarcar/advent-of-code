@@ -1,9 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct Entry {
-    long x,m,a,s;
-};
+using Entry = array<pair<long,long>, 4>;
 
 struct Instruction {
     char v;
@@ -18,45 +16,43 @@ struct InstructionSet {
 };
 
 map<string, InstructionSet> instructions;
+map<char, int> xmas = { {'x', 0}, {'m', 1}, {'a', 2}, {'s', 3} };
 
-bool accepted(const string& insName, const Entry& e) {
+long solve(const string& insName, Entry e) {
     if(insName == "A")
-        return true;
+        return accumulate(e.begin(), e.end(), 1L, [](long acc, const auto& r){
+            return acc * max(0L, r.second - r.first +1);
+        });
     else if(insName == "R")
-        return false;
+        return 0L;
 
     const auto& inSet = instructions[insName];
-
-    string next;
+    long ans = 0L;
     for(auto ins: inSet.ins) {
-        long v;
-        switch(ins.v) {
-            case 'x': v = e.x; break;
-            case 'm': v = e.m; break;
-            case 'a': v = e.a; break;
-            case 's': v = e.s; break;
-            default: cerr << "Not supposed to reach here!\n";
+        Entry ne = e;
+        auto i = xmas[ins.v];
+
+        if(ins.sym == '>' && e[i].second > ins.w) {
+            ne[i] = make_pair(ins.w+1, e[i].second);
+            e[i] = make_pair(e[i].first, ins.w);
+        }
+        else if(e[i].first < ins.w) {
+            ne[i] = make_pair(e[i].first, ins.w-1);
+            e[i] = make_pair(ins.w, e[i].second);
         }
 
-        bool t = (ins.sym == '>')? (v > ins.w) : (v < ins.w);
-        if(t) {
-            next = ins.next;
-            break;
-        }
+        ans += solve(ins.next, ne);
     }
 
-    if(next.empty())
-        next = inSet.def;
+    ans += solve(inSet.def, e);
 
-    return accepted(next, e);
+    return ans;
 }
 
 int main(int argc, char const *argv[]) {
-    vector<Entry> entries;
-
     string str;
     while(getline(cin, str)) {
-        if(str.empty()) continue;
+        if(str.empty()) break;
 
         char c;
         istringstream iss(move(str));
@@ -64,42 +60,35 @@ int main(int argc, char const *argv[]) {
         while(iss >> c, c != '{') 
             name += c;
 
-        if(name.empty()) { //Entry
-            Entry e;
-            iss.ignore(2); iss >> e.x;
-            iss.ignore(3); iss >> e.m;
-            iss.ignore(3); iss >> e.a;
-            iss.ignore(3); iss >> e.s;
-            entries.push_back(e);
-        } else { //Instruction
-            InstructionSet inSet;
-            while(getline(iss, str, ',')) {
-                if(*str.rbegin() == '}') {
-                    inSet.def = string(str.begin(), str.end()-1);
-                    instructions[name] = inSet;
-                    break;
-                }
-
-                istringstream tokenizer(move(str));
-                Instruction in;
-                in.v = tokenizer.get();
-                in.sym = tokenizer.get();
-                tokenizer >> in.w;
-                tokenizer.ignore();
-                tokenizer >> in.next;
-
-                inSet.ins.push_back(in);
+        InstructionSet inSet;
+        while(getline(iss, str, ',')) {
+            if(*str.rbegin() == '}') {
+                inSet.def = string(str.begin(), str.end()-1);
+                instructions[name] = inSet;
+                break;
             }
+
+            istringstream tokenizer(move(str));
+            Instruction in;
+            in.v = tokenizer.get();
+            in.sym = tokenizer.get();
+            tokenizer >> in.w;
+            tokenizer.ignore();
+            tokenizer >> in.next;
+
+            inSet.ins.push_back(in);
         }
     }
 
-    long ans = 0;
-    for(const auto& e: entries) {
-        if(accepted("in", e))
-            ans += e.x + e.m + e.a + e.s;
-    }
+    long ans = solve("in", Entry {
+        make_pair(1,4000),
+        make_pair(1,4000),
+        make_pair(1,4000),
+        make_pair(1,4000),
+    });
+    
 
-    cout << ans << '\n';
+    cout << "Part 2 answer: " << ans << '\n';
 
     return 0;
 }

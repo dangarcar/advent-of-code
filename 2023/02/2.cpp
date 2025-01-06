@@ -30,8 +30,9 @@ int main(int argc, char const *argv[]){
         }
 
         total += r*g*b;
-        cout << total << '\n';
     }
+    
+    cout << "Part 2 answer: " << total << '\n';
 
     return 0;
 }

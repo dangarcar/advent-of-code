@@ -85,13 +85,13 @@ int main(int argc, char const *argv[]) {
         if(adj[first].size() == 6 && adj[second].size() == 6) { // The edges are duplicated and I really don't know why
             auto s1 = sets[first].size();
             auto s2 = sets[second].size();
-            cout << s1 << ' ' << s2 << '\n';
+            //cout << s1 << ' ' << s2 << '\n';
             ans = s1*s2;
             break;
         }
     }
 
-    cout << ans << '\n';
+    cout << "Answer: " << ans << '\n';
 
     return 0;
 }
