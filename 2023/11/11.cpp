@@ -1,66 +1,66 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-constexpr long scale = 1000000;
-set<int> empty_rows, empty_cols;
+#define SCALE 1000000
 
-long distance(int a, int b, int c, int d) {
-    long dist = 0;
-    for(int i=a; i<c; ++i) {
-        if(empty_rows.count(i))
-            dist += scale;
-        else 
-            dist++;
-    }
+vector<pair<int,int>> pos;
+vector<bool> iEmpty, jEmpty;
+
+long distance(int u, int v) {    
+    auto [i1, j1] = pos[u];
+    auto [i2, j2] = pos[v];
+
+    if(i1 > i2) swap(i1, i2);
+    if(j1 > j2) swap(j1, j2);
     
-    for(int j=b; j<d; ++j) {
-        if(empty_cols.count(j))
-            dist += scale;
-        else 
-            dist++;
+    long idst=0, jdst=0;
+    for(int i=i1; i<i2; i++) {
+        if(iEmpty[i])
+            idst += SCALE;
+        else
+            idst++;
     }
-    
-    return dist;
+
+    for(int j=j1; j<j2; ++j) {
+        if(jEmpty[j])
+            jdst += SCALE;
+        else
+            jdst++;
+    }
+
+    return idst + jdst;
 }
-
 
 int main(int argc, const char* argv[]) {
     vector<string> board;
-    string str;
-    while(getline(cin, str)) {
-        board.push_back(str);
+    string buf;
+    while(getline(cin, buf)) {
+        if(buf.empty()) 
+            continue;
+        
+        board.push_back(buf);
     }
 
-    for(int i=0; i<board.size(); ++i) {
-        if(find(board[i].begin(), board[i].end(), '#') == board[i].end()) {
-            empty_rows.insert(i);
-        }
-    }
-
-    for(int i=0; i<board[i].length(); ++i) {
-        bool gal = false;
-        for(auto s: board){
-            if(s[i] == '#')
-                gal = true;
-        }
-
-        if(!gal)
-            empty_cols.insert(i);
-    }
-
-    long total = 0;
+    int n = board.size();
+    iEmpty.assign(n, true);
+    jEmpty.assign(n, true);
     
-    for(int i=0; i<board.size(); ++i) {
-        for(int j=0; j<board[i].length(); ++j) {
-            for(int k=0; k<board.size(); ++k) {
-                for(int l=0; l<board[i].length(); ++l) {
-                    if(board[i][j] == '#' && board[k][l] == '#') {
-                        total += distance(i,j,k,l);
-                    }
-                }
+    for(int i=0; i<n; ++i) {
+        for(int j=0; j<n; ++j) {
+            if(board[i][j] == '#') {
+                pos.push_back({i, j});
+                iEmpty[i] = false;
+                jEmpty[j] = false;
             }
         }
     }
 
-    cout << "Part 2 answer: " << total << '\n';
+    long ans = 0;
+    for(int i=0; i<pos.size(); ++i)
+        for(int j=0; j<i; ++j)
+            ans += distance(i, j);
+
+    cout << "Part 2 answer: " << ans << endl;
+
+    return 0;
 } 

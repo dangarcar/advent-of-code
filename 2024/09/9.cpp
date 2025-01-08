@@ -44,14 +44,6 @@ int main(int argc, char const *argv[]) {
         }
     }
 
-    string s(total, '.');
-    for(int i=0; i<ve.size(); ++i) {
-        for(long j=0; j<ve[i].size; ++j) {
-            s[ve[i].start + j] = '0' + i;
-        }
-    }
-
-    //cout << s << endl;
     cout << "Part 2 answer: "  << ans << endl;
 
     return 0;

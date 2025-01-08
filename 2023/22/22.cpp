@@ -1,24 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-/*
-It's brute force but only needs 6 min in my WSL2 instance because of some little optimizations
-*/
-
 struct Brick {
-    long x1,y1,z1;
-    long x2,y2,z2;
+    int x1,y1,z1;
+    int x2,y2,z2;
 };
-
-struct counting_iterator {
-    size_t count;
-    counting_iterator& operator++() { ++count; return *this; }
-
-    struct black_hole { void operator=(int) {} };
-    black_hole operator*() { return black_hole(); }
-};
-
-vector<Brick> bricks;
 
 bool isOver(const Brick& a, const Brick& b) {
     if (a.x1 > b.x2 || b.x1 > a.x2)
@@ -31,6 +17,7 @@ bool isOver(const Brick& a, const Brick& b) {
 }
 
 int main(int argc, char const *argv[]) {
+    vector<Brick> bricks;
     string str;
     while(getline(cin, str)) {
         if(str.empty()) continue;
@@ -44,22 +31,20 @@ int main(int argc, char const *argv[]) {
         bricks.push_back(b);
     }
 
-    auto sz = bricks.size();
-    sort(bricks.begin(), bricks.end(), [](const auto& a, const auto& b){
+    auto n = bricks.size();
+    sort(bricks.begin(), bricks.end(), [](auto& a, auto& b){
         return a.z1 < b.z1;
     });
 
-    vector<vector<int>> adj(sz);
-    vector<vector<int>> len(sz);
-
-    for(int i=0; i<sz; ++i) {
-        while(1) {
+    vector<vector<int>> child(n), parent(n);
+    for(int i=0; i<n; ++i) {
+        for(;;) {
             bool over = bricks[i].z1 == 1;
             for(int j=0; j<i; ++j) {
                 if(isOver(bricks[i], bricks[j])) {
                     over = true;
-                    len[i].push_back(j);
-                    adj[j].push_back(i);
+                    parent[i].push_back(j);
+                    child[j].push_back(i);
                 }
             }
 
@@ -70,34 +55,40 @@ int main(int argc, char const *argv[]) {
         }
     }
 
-    vector<int> dist(sz, -1);
-
-    long ans = 0;
-    for(int i=0; i<sz; ++i) {
+    int ans = 0;
+    for(int i=0; i<n; ++i) {
+        vector<bool> falling(n, false);
         queue<int> q;
-        set<int> visited;
-        visited.insert(i);
+        falling[i] = true;
         q.push(i);
 
+        int fallen = 0;
+
         while(!q.empty()) {
-            auto e = q.front();
+            auto u = q.front();
             q.pop();
 
-            for(auto j: adj[e]) {
-                auto a = set_intersection(visited.begin(), visited.end(), len[j].begin(), len[j].end(), counting_iterator()).count;
-                if(a == len[j].size()) {
-                    dist[j] = visited.size();
-                    visited.insert(j);
-                    q.push(j);
+            for(auto v: child[u]) {
+                if(falling[v])
+                    continue;
+
+                bool stable = false;
+                for(auto w: parent[v])
+                    if(!falling[w])
+                        stable = true;
+
+                if(!stable) {
+                    fallen++;
+                    falling[v] = true;
+                    q.push(v);
                 }
             }
         }
 
-        ans += max(0UL, visited.size()-1);
-        cout << i << "-" << ans << ' ';
+        //cout << i << ' ' << fallen << '\n';
+        ans += fallen;
     }
-    //cout << sz << '\n';
-    cout << endl;
+
     cout << "Part 2 answer: " << ans << '\n';
 
     return 0;

@@ -1,41 +1,49 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-/*
-Another brute-force with optimizations solution, 8 min 7 s in my WSL2 compiled without optimizations
-*/
-
 vector<string> board;
+map<pair<int,int>, int> nodes;
+vector<vector<pair<int,int>>> adj; // cost, v
+vector<bool> visited;
 
-int R,C;
+int n;
 int incC[] = {0,0,1,-1};
 int incR[] = {1,-1,0,0};
 
-long ans = 0L;
-vector<vector<bool>> visited;
+int ans = 0;
 
-void dfs(int r, int c, long l) {
-    if(r == R-1) {
+void dfs(int v, int l) {
+    if(v == nodes.size() - 1) {
         ans = max(ans, l);
         return;
     }
 
-    visited[r][c] = true;
-
-    for(int i=0; i<4; ++i) {
-        int nr = r + incR[i];
-        int nc = c + incC[i];
-        if(0 <= nr && nr < R
-        && 0 <= nc && nc < C
-        && board[nr][nc] != '#'
-        && visited[nr][nc] == false){
-            l++;
-            dfs(nr, nc, l);
-            l--;
+    visited[v] = true;
+    for(auto [c, w]: adj[v]) {
+        if(!visited[w]) {
+            dfs(w, l + c);
         }
     }
 
-    visited[r][c] = false;
+    visited[v] = false;
+}
+
+void findAdj(int oi, int oj, int i, int j, int v, int l) {
+    if(board[i][j] == 'O' && l > 0) {
+        int u = nodes[{i,j}];
+        adj[v].push_back({l, u});
+        return;
+    }
+
+    for(int k=0; k<4; ++k) {
+        int ni = i + incR[k], nj = j + incC[k];
+        if(0 <= ni && ni < n
+        && 0 <= nj && nj < n
+        && board[ni][nj] != '#'
+        && (ni != oi || nj != oj)) {
+            findAdj(i, j, ni, nj, v, l+1);
+        }
+    }
 }
 
 int main(int argc, char const *argv[]) {    
@@ -45,11 +53,36 @@ int main(int argc, char const *argv[]) {
         board.push_back(str);
     }
 
-    R = board.size();
-    C = board[0].size();
+    n = board.size();
+    int id = 0;
+    for(int i=0; i<n; ++i) {
+        for(int j=0; j<n; ++j) {
+            if(board[i][j] == '#') 
+                continue;
 
-    visited.assign(R, vector<bool>(C, false));
-    dfs(0, 1, 0L);
+            int pass = 0;
+            for(int k=0; k<4; ++k) {
+                int ni = i + incR[k], nj = j + incC[k];
+                if(0 <= ni && ni < n
+                && 0 <= nj && nj < n
+                && board[ni][nj] != '#')
+                    pass++;
+            }
+
+            if(pass > 2 || i==0 || i==n-1) {
+                board[i][j] = 'O';
+                nodes[{i, j}] = id++;
+            }
+        }
+    }
+
+    adj.assign(nodes.size(), {});
+    for(auto [loc, v]: nodes) {
+        findAdj(-1, -1, loc.first, loc.second, v, 0);
+    }
+
+    visited.assign(nodes.size(), false);
+    dfs(0, 0);
     cout << "Part 2 answer: " << ans << '\n';
 
     return 0;

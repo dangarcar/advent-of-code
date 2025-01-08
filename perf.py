@@ -38,7 +38,7 @@ def main():
 
     days.sort(key=lambda x: (x['year'], x['input']))    
 
-    for e in days:
+    """for e in days:
         i = e['exe'].split('/')[0]
         prefix = str(e['year']) + '/'
         x = subprocess.getoutput(f'g++ -std=c++20 -O2 {prefix + e['cpp']} -o {prefix + e['exe']}')
@@ -46,7 +46,7 @@ def main():
             print("ERROR IN DAY " + i)
             print(x)
         else:
-            print(f"DAY {i} {e['year']} COMPILED")
+            print(f"DAY {i} {e['year']} COMPILED")"""
 
     t = []
     for e in days:
