@@ -5,31 +5,56 @@ int incX[] = {0, 1, 0, -1 };
 int incY[] = {-1, 0, 1, 0 };
 
 vector<string> board;
+vector<vector<int>> rowObs, colObs;
+vector<vector<bitset<4>>> visited;
 int n;
 
-int pathLenght(int i, int j) {
-    int v = 0;
-    int len = 0;
-
-    while(len <= n*n) {
-        int ni = i + incY[v], nj = j + incX[v];
-        if(0 > ni || ni >= n || 0 > nj || nj >= n)
-            return len;
-        while(board[ni][nj] == '#') {
-            v = (v + 1) % 4;
-            ni = i + incY[v];
-            nj = j + incX[v];
-
-            if(0 > ni || ni >= n || 0 > nj || nj >= n)
-                return len;
+bool move(int& i, int& j, int k) {
+    if(k == 0) { //UP -i
+        for(auto ei: ranges::views::reverse(colObs[j])) {
+            if(ei < i) {
+                i = ei + 1;
+                return true;
+            }
         }
-
-        i = ni;
-        j = nj;
-        len++;
+    } else if(k == 1) { //RIGHT +j
+        for(auto ej: rowObs[i]) {
+            if(ej > j) {
+                j = ej - 1;
+                return true;
+            }
+        }
+    } else if(k == 2) { //DOWN +i
+        for(auto ei: colObs[j]) {
+            if(ei > i) {
+                i = ei - 1;
+                return true;
+            }
+        }
+    } else if(k == 3) { //LEFT -j
+        for(auto ej: ranges::views::reverse(rowObs[i])) {
+            if(ej < j) {
+                j = ej + 1;
+                return true;
+            }
+        }
     }
 
-    return -1;
+    return false;
+}
+
+bool inLoop(int i, int j) {
+    int k = 0;
+
+    while(!visited[i][j][k]) {
+        visited[i][j][k] = true;
+        if(move(i, j, k))
+            k = (k+1) % 4;
+        else
+            return false;
+    }
+
+    return true;
 }
 
 int main(int argc, char const *argv[]) {
@@ -42,27 +67,43 @@ int main(int argc, char const *argv[]) {
 
     int begI, begJ;
     n = board.size();
+    rowObs.assign(n, {});
+    colObs.assign(n, {});
 
     for(int i=0; i<n; ++i) {
         for(int j=0; j<n; ++j) {
             if(board[i][j] == '^') {
                 begI = i;
                 begJ = j;
-                break;
+            } else if(board[i][j] == '#') {
+                rowObs[i].push_back(j);
+                colObs[j].push_back(i);
             }
         }
+    }
+
+    for(int i=0; i<n; ++i) {
+        sort(rowObs[i].begin(), rowObs[i].end());
+        sort(colObs[i].begin(), colObs[i].end());
     }
 
     int ans = 0;
     for(int i=0; i<n; ++i) {
         for(int j=0; j<n; ++j) {
             if(board[i][j] == '.') {
-                board[i][j] = '#';
+                visited.assign(n, vector<bitset<4>>(n, 0));
+                auto vi = rowObs[i], vj = colObs[j];
+                vi.insert(upper_bound(vi.begin(), vi.end(), j), j);
+                vj.insert(upper_bound(vj.begin(), vj.end(), i), i);
+                
+                swap(rowObs[i], vi);
+                swap(colObs[j], vj);
 
-                if(pathLenght(begI, begJ) == -1)
+                if(inLoop(begI, begJ))
                     ans++;
-
-                board[i][j] = '.';
+                
+                swap(rowObs[i], vi);
+                swap(colObs[j], vj);
             }
         }
     }

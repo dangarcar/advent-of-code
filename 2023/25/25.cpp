@@ -1,30 +1,39 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-/*
+struct ufds {
+    int numSets;
+    vector<int> p;
 
-A very bad implementation of Karger's algorithm I came up by myself,
-I don't figure out how I make it work yet
-29th December 2023
+    ufds(int n): numSets(n), p(n, -1) {}
 
-*/
-
-map<string, vector<string>> m;
-vector<string> nodes;
-vector<multiset<int>> adj; // The first use case for multisets I've encountered
-
-template <typename I> //If std do this, why not do it myself?
-int getRandomElementFromSet(const I& b, const I& e) {
-    auto n = rand()%distance(b, e);
-    auto it = b;
-    for(int i=0; i<n; ++i) {
-        ++it;
+    int find(int i) {
+        return (p[i] < 0)? i : p[i] = find(p[i]);
     }
-    return *it;
-}
+
+    bool related(int i, int j) {
+        return find(i) == find(j);
+    }
+
+    void join(int i, int j) {
+        int x = find(i), y = find(j);
+        if(x == y) return;
+        if(p[x] < p[y]) swap(x, y);
+        p[y] += p[x];
+        p[x] = y;
+        --numSets;
+    }
+
+    int size(int i) {
+        return -p[find(i)];
+    }
+};
 
 int main(int argc, char const *argv[]) {
     string str;
+    map<string, int> alias;
+    vector<pair<int,int>> edges;
+    int n = 0;
     while(getline(cin, str)) {
         if(str.empty()) continue;
         istringstream iss(str);
@@ -32,66 +41,45 @@ int main(int argc, char const *argv[]) {
         string name, conn; 
         iss >> name;
         name = name.substr(0, 3);
+        if(!alias.contains(name))
+            alias[name] = n++;
+        
         while(iss >> conn) {
-            m[name].push_back(conn);
-            m[conn].push_back(name);
+            if(!alias.contains(conn))
+                alias[conn] = n++;
+
+            edges.push_back({alias[name], alias[conn]});
         }
     }
 
-    transform(m.begin(), m.end(), back_inserter(nodes), [](const auto& p){ return p.first; }); //I prefer ints over strings
-
-    auto sz = nodes.size();
-    long ans;
-
     while(true) {
-        map<int, set<int>> sets;
-        set<int> nodesAvailable; // Redundant data
-        for(int i=0; i<sz; ++i)  {
-            nodesAvailable.insert(i);
-            sets[i].insert({i});
+        ufds uf(n);
+        auto es = edges;
+        
+        while(uf.numSets > 2) {
+            int j = rand()%es.size();
+            auto [u, v] = es[j];
+            uf.join(u, v);
+            es.erase(es.begin() + j);
         }
+        
+        int ans = 1;
+        for(int i=0; i<n; ++i) {
+            if(uf.p[i] < 0) {
+                ans *= -uf.p[i];
 
-        adj.assign(nodes.size(), {});
-        for(const auto& [k, v]: m) {
-            auto u = find(nodes.begin(), nodes.end(), k) - nodes.begin();
-            for(auto s: v) {
-                auto v = find(nodes.begin(), nodes.end(), s) - nodes.begin();
-                adj[u].insert(v);
-                adj[v].insert(u);
+                if(uf.p[i] > -5) { //Remove small groups
+                    ans = 0;
+                    break;
+                }
             }
         }
-
-        while(nodesAvailable.size() > 2) {
-            auto a = getRandomElementFromSet(nodesAvailable.begin(), nodesAvailable.end());
-            auto b = getRandomElementFromSet(adj[a].begin(), adj[a].end());
-
-            for(auto e: adj[b]) { // Change b from its neighbours
-                adj[e].erase(b);
-                adj[e].insert(a);
-            }
-
-            adj[a].insert(adj[b].begin(), adj[b].end()); //Add all of its neighbours
-            adj[a].erase(a); // remove duplicates
-            
-            adj[b].clear(); // remove b from existence
-            nodesAvailable.erase(b);
-            sets[a].insert(sets[b].begin(), sets[b].end());
-            sets.erase(b);
-        }
-
-        auto first = *nodesAvailable.begin();
-        auto second = *(++nodesAvailable.begin());
-
-        if(adj[first].size() == 6 && adj[second].size() == 6) { // The edges are duplicated and I really don't know why
-            auto s1 = sets[first].size();
-            auto s2 = sets[second].size();
-            //cout << s1 << ' ' << s2 << '\n';
-            ans = s1*s2;
+        
+        if(ans != 0) {
+            cout << "Answer: " << ans << '\n';
             break;
         }
     }
-
-    cout << "Answer: " << ans << '\n';
 
     return 0;
 }
