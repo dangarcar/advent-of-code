@@ -1,31 +1,30 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-//TODO: im very ashamed of this shit
+#define int long long
 
-int main() {
+signed main() {
     int dial = 50, ans = 0;
     char c;
     while(cin >> c) {
         int inc; cin >> inc;
         cin.ignore();
-        int s;
-        if(c == 'L')
-            s = -1;
-        else
-            s = 1;
 
-        while(inc > 0) {
-            dial += s;
-            inc--;
-
-            if(dial == 100)
-                dial = 0;
-            if(dial < 0)
-                dial = 100 + dial;
-
-            if(dial == 0) ans++;
+        int mod = inc % 100;
+        ans += abs(inc / 100);
+        
+        bool zero = dial == 0;
+        if(c == 'L') {
+            dial -= mod;
+            if(dial <= 0) 
+                ans += !zero;
+        } else {
+            dial += mod;
+            if(dial >= 100) 
+                ans++;
         }
+            
+        dial = (dial + 100) % 100;            
     }
 
     cout << ans << '\n';
