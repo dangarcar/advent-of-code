@@ -44,7 +44,7 @@ signed main() {
         ans += nans;
     }
     
-    cout << ans << '\n';
+    cout << "Part 2 answer: " << ans << '\n';
 
     return 0;
 }

@@ -27,7 +27,7 @@ signed main() {
         dial = (dial + 100) % 100;            
     }
 
-    cout << ans << '\n';
+    cout << "Part 2 answer: " << ans << '\n';
 
     return 0;
 }

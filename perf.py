@@ -34,7 +34,7 @@ def getPrograms(year):
 
 
 def main():
-    days = getPrograms(2023) + getPrograms(2024)
+    days = getPrograms(2023) + getPrograms(2024) + getPrograms(2025)
 
     days.sort(key=lambda x: (x['year'], x['input']))    
 

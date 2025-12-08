@@ -1,6 +1,6 @@
 # My advent of code
 
-My solutions to the Advent of Code of 2023 and 2024.
+My solutions to the Advent of Code of 2023, 2024 and 2025.
 
 Some of the days have only the solutions of part 2, as I wrote it over the part 1 solutions.
 

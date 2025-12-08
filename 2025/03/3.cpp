@@ -29,7 +29,7 @@ signed main() {
             ans += pow(10, T-k-1) * a[k];
     }
 
-    cout << ans << '\n';
+    cout << "Part 2 answer: " << ans << '\n';
     
     return 0;
 }

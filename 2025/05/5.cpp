@@ -30,7 +30,7 @@ signed main() {
             ans += a - src + 1;
     }
 
-    cout << ans << '\n';
+    cout << "Part 2 answer: " << ans << '\n';
 
     return 0;
 }
