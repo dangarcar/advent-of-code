@@ -22,7 +22,8 @@ def getPrograms(year):
                 "year": year,
                 "cpp": cpp,
                 "input": cpp.replace('.cpp', '.in'),
-                "exe": cpp.replace('.cpp', '')
+                "exe": cpp.replace('.cpp', ''),
+                "day": i
             }
 
             days.append(day)
@@ -34,7 +35,8 @@ def getPrograms(year):
 
 
 def main():
-    days = getPrograms(2023) + getPrograms(2024) + getPrograms(2025)
+    #days = getPrograms(2023) + getPrograms(2024) + getPrograms(2025)
+    days = getPrograms(2025)
 
     days.sort(key=lambda x: (x['year'], x['input']))    
 
@@ -55,20 +57,23 @@ def main():
         start = time.time()
         x = subprocess.getoutput(f'./{prefix + e['exe']} < {prefix + e['input']}')
         dt = time.time() - start
-        t.append(dt)
+        t.append({
+            'time': dt, 
+            'year': e['year'],
+            'day': e['day']
+        })
         print(f"DAY {i}: {"{:.2f}".format(1000*dt)}ms")
         print(x)
         print()
         os.remove(prefix + e['exe'])
 
     
-    total = reduce(lambda x,y: x+y, t)
+    total = reduce(lambda x,y: x + y['time'], t, 0.0)
     print(f'\n\nTotal: {"{:.2f}".format(1000*total)}ms')
-    per = [(x/total, i) for i, x in enumerate(t)]
-    per.sort(reverse=True)
-    for i, p in enumerate(per):
-        if(t[p[1]] > 1/100):
-            print(f'{"{:01}".format(i+1)}º: {2023 if p[1]//25==0 else 2024} day {"{:02}".format((p[1]%25)+1)} -> {"{:.2f}".format(100*p[0])}%\t\t{"{:.2f}".format(1000*t[p[1]])}ms')
+    t.sort(reverse=True, key=lambda x: x['time'])
+    for i, e in enumerate(t):
+        if(e['time'] > 0.01):
+            print(f'{"{:01}".format(i+1)}º: {e['year']} day {e['day']} -> {"{:05.2f}".format(100*e['time']/total)}%\t\t{"{:.2f}".format(1000*e['time'])}ms')
         
 
 if __name__ == "__main__":
