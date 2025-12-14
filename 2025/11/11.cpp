@@ -5,6 +5,7 @@ using namespace std;
 
 vector<vector<int>> adj;
 vector<bool> visited, reachable;
+vector<int> dp;
 unordered_map<string, int> idx;
 
 
@@ -12,13 +13,16 @@ int dfs(int u, int dst) {
     if(u == dst)
         return 1;
 
+    if(dp[u] != -1)
+        return dp[u];
+
     int a = 0;
     for(int v: adj[u]) {
         if(reachable[v])
             a += dfs(v, dst);
     }
 
-    return a;
+    return dp[u] = a;
 }
 
 bool order(int u, int dst) {
@@ -99,6 +103,7 @@ signed main() {
     }
 
     int ans = 1;
+    dp.assign(n, -1);
     for(int i=1; i<4; ++i) {
         ans *= dfs(scheme[i-1], scheme[i]);
     }
