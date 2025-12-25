@@ -10,10 +10,14 @@ I haven't uploaded the inputs as mentioned in the [AoC web](https://adventofcode
 
 ## Performance
 I've tried to make them run as fast as possible, so there is the script called perf.py that compiles everything and runs it.
+
 If in every folder of every problem there is an input file with the name of the program, for example `1.in` for day 1 of any year, in linux you could run the script given that you have g++ with cpp 20 and python.
+
 Every program is compiled with -O2 and the time measured is execution time, not launch program time
 
+#### My results
 With my Ubuntu WSL2 32gb ram 13th gen i7 machine the sum of the execution times of every program is consistently under 1.4 seconds, but I think this might be improved in under a second for the future
+
 ![Screenshot of the result of the perf.py script](times.png)
 
 ## 2023
