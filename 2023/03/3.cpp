@@ -1,11 +1,10 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 int incI[] = {1,1,1,-1,-1,-1,0,0};
 int incJ[] = {0,1,-1,0,1,-1,1,-1};
 
-int main(int argc, char const *argv[])
-{
+signed main() {
+    AoCTimer timer;
     
     vector<string> board;
     string str;

@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 struct op {
     string a, b, c;
@@ -102,7 +101,9 @@ void printOP(op o) {
     cout << format("{}:{} {} {}:{} -> {}:{}\n", aliases[o.a], o.a,  o.op, aliases[o.b], o.b, aliases[o.c], o.c);
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string buf;
     x = 0; 
     y = 0;

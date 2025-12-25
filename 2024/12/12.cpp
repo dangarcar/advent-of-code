@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 #define NONE 0
 #define UP 8
@@ -61,7 +60,9 @@ void regionDfs(int i, int j, int k) {
         regionDfs(ni, nj, k);
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string buf;
     while(getline(cin, buf)) {
         if(!buf.empty())

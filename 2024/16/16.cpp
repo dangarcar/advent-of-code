@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 #define INF 1000000000
 
@@ -35,7 +34,9 @@ void visitParent(int i, int j, int k) {
     }
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string buf;
     while(getline(cin, buf)) {
         if(buf.empty()) continue;

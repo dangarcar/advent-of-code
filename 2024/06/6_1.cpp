@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 int incX[] = {0, 1, 0, -1 };
 int incY[] = {-1, 0, 1, 0 };
@@ -39,7 +38,9 @@ int pathLenght() {
     return -1;
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string buf;
     while(getline(cin, buf)) {
         if(!buf.empty()) {

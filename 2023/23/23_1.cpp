@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 vector<string> board;
 
@@ -57,7 +56,9 @@ void dfs(int r, int c, set<pair<int,int>> visited, set<pair<int,int>> path) {
     }
 }
 
-int main(int argc, char const *argv[]) {    
+signed main() {
+    AoCTimer timer;
+        
     string str;
     while(getline(cin, str)) {
         if(str.empty()) continue;

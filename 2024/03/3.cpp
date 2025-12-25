@@ -1,8 +1,5 @@
-#include <bits/stdc++.h>
-#include <cstring>
-#include <sstream>
-#include <string>
-using namespace std;
+#include "../../AOC.h"
+
 
 long multiply(const std::string& str) {
     stringstream ss;
@@ -21,7 +18,9 @@ long multiply(const std::string& str) {
         return 0;
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string buf;
     long ans = 0;
     bool enable = true;

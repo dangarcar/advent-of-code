@@ -1,6 +1,4 @@
-#include <bits/stdc++.h>
-#include <sstream>
-using namespace std;
+#include "../../AOC.h"
 
 int incX[] = {0, 0, 1, -1};
 int incY[] = {1, -1, 0, 0};
@@ -31,7 +29,9 @@ int path(const set<pair<int,int>>& bytes, int n) {
     return dist[n-1][n-1];
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     int n = 71;
     vector<pair<int,int>> bytes;
     

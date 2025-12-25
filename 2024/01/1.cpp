@@ -1,9 +1,8 @@
-#include <bits/stdc++.h>
-#include <sstream>
-#include <unordered_map>
-using namespace std;
+#include "../../AOC.h"
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string s;
     vector<int> v, w;
     unordered_map<int, pair<int, int>> m;

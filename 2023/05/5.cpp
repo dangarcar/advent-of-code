@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 struct range {
     long s,t, w;
@@ -19,7 +18,9 @@ vector<pair<long,long>> getSeeds() {
     return seeds;
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     cin.tie(NULL);
     ios::sync_with_stdio(false);
 

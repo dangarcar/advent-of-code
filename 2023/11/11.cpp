@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 #define SCALE 1000000
 
@@ -31,7 +30,9 @@ long distance(int u, int v) {
     return idst + jdst;
 }
 
-int main(int argc, const char* argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     vector<string> board;
     string buf;
     while(getline(cin, buf)) {

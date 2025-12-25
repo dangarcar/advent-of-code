@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 struct Data {
     long i, cnt, perm;
@@ -55,7 +54,9 @@ string unfold(const string& str) {
     return ans;
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string buf;
     int number=0;
 

@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 struct op {
     string a, b, c;
@@ -118,7 +117,9 @@ void swapOuts(const string& xs, const string& ys) {
     swap(x, y);
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string buf;
     x = 0; 
     y = 0;

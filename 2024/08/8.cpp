@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 vector<string> board;
 vector<vector<bool>> visited;
@@ -24,7 +23,9 @@ void solve(int y, int x) {
     }
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string buf;
     while(getline(cin, buf)) {
         if(buf.empty())

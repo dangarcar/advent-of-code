@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 using Entry = array<pair<long,long>, 4>;
 
@@ -49,7 +48,9 @@ long solve(const string& insName, Entry e) {
     return ans;
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string str;
     while(getline(cin, str)) {
         if(str.empty()) break;

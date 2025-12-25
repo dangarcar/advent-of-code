@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 bool compatible(const vector<int>& a, const vector<int>& b) {
     int k = 6;
@@ -12,7 +11,9 @@ bool compatible(const vector<int>& a, const vector<int>& b) {
     return true;
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string buf;
     vector<vector<int>> keys, locks;
     vector<string> s;

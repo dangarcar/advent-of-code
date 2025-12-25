@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 //This solution is the one I'm using for the performance test, but this has been made in Jan 2025, not in Dec 2023, as the other are
 

@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 map<char, vector<pair<int,int>>> dirs = {
     {'-', {{0,1},  {0,-1}} },
@@ -44,7 +43,9 @@ void fill(int r, int c, char ch) {
     }
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     vector<string> board;
     string buf;
     while(getline(cin, buf)) {
@@ -117,7 +118,7 @@ int main(int argc, char const *argv[]) {
         }
     }
 
-    fill(0, 0, ' '); //Remove background
+    fill(0LL, 0LL, ' '); //Remove background
 
     /*for(auto v: boardBig) {
         for(auto e: v) {

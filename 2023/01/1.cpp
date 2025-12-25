@@ -1,16 +1,17 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 string names[] = {
     "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"
 };
 
-int main(int argc, char const *argv[]){
+signed main() {
+    AoCTimer timer;
+    
     string str;
     int total = 0;
     while(getline(cin, str)) {
         int l = -1, r;
-        size_t sz = str.length();
+        int sz = str.length();
 
         for(int i=0; i<sz; ++i) {
             if('0' <= str[i] && str[i] <= '9') {
@@ -20,7 +21,7 @@ int main(int argc, char const *argv[]){
                 r = str[i] - '0';
             } else {
                 for(int j=0; j<9; ++j) {
-                    size_t szN = names[j].length();
+                    int szN = names[j].length();
                     if(strncmp(names[j].c_str(), str.c_str() + i, szN) == 0) {
                         if(l == -1) {
                             l = j+1;

@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
  
 /*
 I coded a BFS for the first part but then changed it, so it hasn't been saved.
@@ -16,7 +15,9 @@ int incC[] = {0,0,-1,1};
 
 vector<string> board;
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string str;
     while(getline(cin, str)) {
         if(str.empty()) continue;

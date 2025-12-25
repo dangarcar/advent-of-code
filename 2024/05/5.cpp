@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 set<int> adj[100];
 
@@ -25,7 +24,9 @@ void orderVector(vector<int>& v) {
     }
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string buf;
     while(getline(cin, buf)) {
         if(buf.empty()) break;

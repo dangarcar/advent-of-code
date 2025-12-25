@@ -1,6 +1,5 @@
 #include "../../AOC.h"
 
-#define int long long
 #define T 12
 
 

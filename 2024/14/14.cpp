@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 // Optimized version using modular arithmethic
 
@@ -9,7 +8,9 @@ struct vec2 {
 
 int ny = 103, nx = 101;
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string buf;
     vector<vec2> pos, vel;
     while(getline(cin, buf)) {

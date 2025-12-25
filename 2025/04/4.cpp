@@ -1,12 +1,10 @@
 #include "../../AOC.h"
 
-#define int long long
-
 
 int incI[] = {-1, -1, -1, 0, 0, 1, 1, 1};
 int incJ[] = {-1, 0, 1, -1, 1, -1, 0, 1};
 
-signed main() {
+signed main() {    
     AoCTimer timer;
 
     vector<string> board;

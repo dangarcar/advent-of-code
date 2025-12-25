@@ -1,7 +1,6 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
-#define int long long
+
 
 struct Test {
     string goal;
@@ -35,6 +34,8 @@ int solve(const Test& t) {
 }
 
 signed main() {
+    AoCTimer timer;
+    
     string buf;    
     vector<Test> tests;
     while(getline(cin, buf)) {

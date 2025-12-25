@@ -1,7 +1,8 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
-int main() {
+signed main() {
+    AoCTimer timer;
+    
     int total = 0;
     string str;
     map<int,int> m;

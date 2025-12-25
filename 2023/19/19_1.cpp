@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 struct Entry {
     long x,m,a,s;
@@ -51,7 +50,9 @@ bool accepted(const string& insName, const Entry& e) {
     return accepted(next, e);
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     vector<Entry> entries;
 
     string str;

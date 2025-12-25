@@ -1,6 +1,6 @@
 #include "../../AOC.h"
 
-#define int long long
+
 
 vector<vector<int>> adj;
 vector<bool> visited, reachable;

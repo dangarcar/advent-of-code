@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 enum Type {
     CONJ, FLIP
@@ -29,7 +28,9 @@ vector<string> getOutputs(istringstream& iss) {
     return o;
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     map<string, Node> nodes;
     vector<string> broadcaster;
 

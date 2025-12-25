@@ -56,14 +56,15 @@ def run_cmd(cmd, day, year):
     return result.stderr, day, year
 
 
-def main():
-    #days = getPrograms(2023) + getPrograms(2024) + getPrograms(2025)
-    days = getPrograms(2025)
+def main():    
+    days = getPrograms(2023) + getPrograms(2024) + getPrograms(2025)
 
     days.sort(key=lambda x: (x['year'], x['input']))    
 
+
     print(bcolors.HEADER + "\n\n-----COMPILATION-----\n" + bcolors.ENDC)
     times_file = "times.txt"
+    open(times_file, 'w').close()
     commands = []
     for e in days:
         prefix = str(e['year']) + '/'
@@ -73,7 +74,7 @@ def main():
             e['year']
         ))
         
-    with cf.ThreadPoolExecutor(max_workers=len(commands)) as pool:
+    with cf.ThreadPoolExecutor() as pool:
         futures = [pool.submit(run_cmd, cmd, day, year) for cmd, day, year in commands]
 
         for future in cf.as_completed(futures):

@@ -1,6 +1,6 @@
 #include "../../AOC.h"
 
-#define int long long
+
 
 
 signed main() {

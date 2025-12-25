@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 vector<long> v;
 long tgt;
@@ -24,7 +23,9 @@ bool possible(long last, int i, int n) {
     return a || b || c;
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string buf;
     long ans = 0;
     while(getline(cin, buf)) {

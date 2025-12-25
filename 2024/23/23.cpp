@@ -1,7 +1,8 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     map<string, set<string>> adj;
     string buf;
     while(getline(cin, buf)) {

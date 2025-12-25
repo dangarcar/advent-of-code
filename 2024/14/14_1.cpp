@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 struct vec2 {
     int x, y;
@@ -12,7 +11,9 @@ ostream& operator<<(ostream& os, const vec2& v) {
 
 int ny = 103, nx = 101;
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string buf;
     vector<vec2> pos;
     vector<vec2> vel;

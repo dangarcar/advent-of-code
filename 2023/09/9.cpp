@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 vector<long> getDerivative(const vector<long>& v){
     vector<long> dv(v.size()-1);
@@ -18,7 +17,9 @@ long next(vector<long> seq) {
     return *seq.rbegin() + next(dv);
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string str;
     long ans = 0;
 

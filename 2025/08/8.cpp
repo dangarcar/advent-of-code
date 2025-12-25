@@ -1,7 +1,5 @@
 #include "../../AOC.h"
 
-#define int long long
-
 
 struct Point { int x, y, z; };
 using edge_t = pair<int, pair<int,int>>; //c, u, v

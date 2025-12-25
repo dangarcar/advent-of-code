@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 long HASH(const string& s) {
     long a=0; 
@@ -12,7 +11,9 @@ long HASH(const string& s) {
     return a;
 }
 
-int main(int argc, char const *argv[]){
+signed main() {
+    AoCTimer timer;
+    
     string str;
     getline(cin, str);
     istringstream iss(str);

@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 #define N 75
 
@@ -72,7 +71,9 @@ long solve(string e, int t) {
     return cache[t][e] = solve(multiply(e, "2024"), t - 1);
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     int a;
     vector<int> nums;
     while(cin >> a)

@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 //UGLY BUT IT WORKS
 
@@ -29,7 +28,7 @@ bool dfs(int i, int j) {
     bool ret = false;
     if(!v.empty()) {
         int innerWays = 0;
-        for(auto [ni, nj]: v) {
+        for(auto& [ni, nj]: v) {
             if(dfs(ni, nj)) {
                 innerWays++;
                 ret |= true;
@@ -43,7 +42,9 @@ bool dfs(int i, int j) {
     return ret;
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string buf;
     while(getline(cin, buf)) {
         if(buf.empty())

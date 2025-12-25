@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 int findXmas(const string& s) {
     int ans = 0;
@@ -19,7 +18,9 @@ int findXmas(const string& s) {
     return ans;
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string buf;
     vector<string> board, boardTransposed, boardD1, boardD2;
     while(getline(cin, buf)) {

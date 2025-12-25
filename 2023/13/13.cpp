@@ -1,7 +1,8 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     long total = 0;
     string str;
     vector<string> v;

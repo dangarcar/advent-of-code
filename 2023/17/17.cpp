@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 constexpr int INF = 1e9;
 
@@ -32,7 +31,9 @@ int operator<=>(const info& a, const info& b) {
     return a.first - b.first;
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string str;
     while(getline(cin, str)) {
         if(str.empty()) continue;

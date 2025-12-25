@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 bool checkFor(vector<int> a, int k) {
     vector<int> diff;
@@ -18,7 +17,9 @@ bool checkFor(vector<int> a, int k) {
     return true;
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string buf;
     vector<vector<int>> nums;
     while(getline(cin, buf)) {

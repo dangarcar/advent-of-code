@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 #define SECRETS 2000
 
@@ -22,7 +21,9 @@ bitset<MAX_HASH> b;
 vector<vector<int>> seq;
 vector<vector<int>> diff;
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     int a;
     while(cin >> a) {
         vector<int> d(SECRETS), s(SECRETS + 1);

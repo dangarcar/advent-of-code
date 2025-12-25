@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 #define CHEAT_LENGTH 20
 #define THRESHOLD 100
@@ -24,7 +23,9 @@ void dfs(int oi, int oj, int i, int j) {
     }
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string buf;
     while(getline(cin, buf)) {
         if(buf.empty()) 

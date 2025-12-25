@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 struct vec2 {
     long x, y;
@@ -30,7 +29,9 @@ long determin(mat2 m) {
     return m.a11*m.a22 - m.a12*m.a21;
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string buf;
     long ans = 0;
     while(getline(cin, buf)) {

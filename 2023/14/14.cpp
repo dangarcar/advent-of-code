@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 long cycle(vector<string>& board) {
     for(int j=0; j<board[0].size(); ++j) {
@@ -70,7 +69,9 @@ long cycle(vector<string>& board) {
     return total;
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     vector<string> board;
     string str;
 

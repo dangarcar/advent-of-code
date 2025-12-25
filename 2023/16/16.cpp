@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 enum Direction {
     UP, RIGHT, LEFT, DOWN, NONE
@@ -84,7 +83,9 @@ long solve(int r, int c, Direction d) {
     return ans;
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string str;
     while(getline(cin, str)) {
         if(!str.empty())

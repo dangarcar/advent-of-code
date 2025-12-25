@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 vector<string> prefs;
 unordered_map<string, long> cache;
@@ -22,7 +21,9 @@ long solve(const string& s) {
     return ret;
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string buf;
     getline(cin, buf);
     stringstream ss;

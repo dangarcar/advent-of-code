@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 struct Line {
     long double x,y,z, dx, dy, dz;
@@ -26,7 +25,9 @@ pair<long double, long double> intersection(Line l1, Line l2) {
 
 long double L = 200000000000000.0L, R = 400000000000000.0L;
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string str;
     vector<Line> lines;
 

@@ -1,6 +1,6 @@
 #include "../../AOC.h"
 
-#define int long long
+
 
 int ans;
 vector<string> board;
@@ -27,7 +27,7 @@ int solve(int i, int j) {
 }
 
 signed main() {
-    AoCTimer timer; 
+    AoCTimer timer;
 
     string buf;
     while(getline(cin, buf)) {

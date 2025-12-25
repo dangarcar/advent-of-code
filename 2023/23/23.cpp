@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 vector<string> board;
 map<pair<int,int>, int> nodes;
@@ -46,7 +45,9 @@ void findAdj(int oi, int oj, int i, int j, int v, int l) {
     }
 }
 
-int main(int argc, char const *argv[]) {    
+signed main() {
+    AoCTimer timer;
+        
     string str;
     while(getline(cin, str)) {
         if(str.empty()) continue;

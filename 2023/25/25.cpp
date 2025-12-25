@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 struct ufds {
     int numSets;
@@ -29,7 +28,9 @@ struct ufds {
     }
 };
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string str;
     map<string, int> alias;
     vector<pair<int,int>> edges;

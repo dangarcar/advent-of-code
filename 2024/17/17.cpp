@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 char run(long a, long b, long c, const string& prog) {
     for(int pc=0; pc<prog.size(); pc += 2) {
@@ -68,7 +67,9 @@ long solve(const string& prog, int i, long a) {
     return -1;
 }
 
-int main(int argc, char const *argv[]) {    
+signed main() {
+    AoCTimer timer;
+        
     string prog;
     long a, b, c;
     

@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 #define INTER 25
 
@@ -122,7 +121,9 @@ long solve(string s, int depth) {
     return cache[depth-1][s] = ans;
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string buf;
     vector<string> input;
     vector<long> nums;

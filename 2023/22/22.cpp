@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 struct Brick {
     int x1,y1,z1;
@@ -16,7 +15,9 @@ bool isOver(const Brick& a, const Brick& b) {
     return a.z1-1 == b.z2;
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     vector<Brick> bricks;
     string str;
     while(getline(cin, str)) {

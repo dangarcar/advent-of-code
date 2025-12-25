@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 char cards[] {
     'J','2','3','4','5','6','7','8','9','T','Q','K','A'
@@ -107,7 +106,9 @@ bool operator<(const Hand& a, const Hand& b) {
     return true;
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string hand; 
     int bid;
 

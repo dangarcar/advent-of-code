@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 /*
     The solution is made in O(1) time because it solves an equation instead of brute forcing
@@ -12,7 +11,9 @@ using namespace std;
     ans = t - j1*2 +1
 */
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string str;
     
     cin >> str; 

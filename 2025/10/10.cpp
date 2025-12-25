@@ -1,6 +1,6 @@
 #include "../../AOC.h"
 
-#define int long long
+
 
 struct Test {
     vector<vector<int>> moves;
@@ -127,6 +127,7 @@ int solve(const Test& t) {
 
     return ans;
 }
+
 
 signed main() {
     AoCTimer timer;

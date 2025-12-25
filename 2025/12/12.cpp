@@ -1,8 +1,5 @@
 #include "../../AOC.h"
 
-#define int long long
-
-
 //WHY DOES THIS WORK?????
 
 signed main() {

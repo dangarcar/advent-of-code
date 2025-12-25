@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 long gcd(long a, long b) {
     while(true) {
@@ -12,7 +11,9 @@ long gcd(long a, long b) {
     }
 }
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     string way;
     cin >> way;
     size_t sz = way.length();

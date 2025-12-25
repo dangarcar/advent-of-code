@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 map<char, vector<pair<int,int>>> dirs = {
     {'-', {{0,1},  {0,-1}} },
@@ -12,7 +11,9 @@ map<char, vector<pair<int,int>>> dirs = {
     {'.', {}}
 };
 
-int main(int argc, char const *argv[]) {
+signed main() {
+    AoCTimer timer;
+    
     vector<string> board;
     string buf;
     while(getline(cin, buf)) {
