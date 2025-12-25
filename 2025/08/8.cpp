@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 #define int long long
 
@@ -35,6 +34,8 @@ struct ufds {
 
 
 signed main() {
+    AoCTimer timer;
+
     string buf;
     vector<Point> points;
     while(getline(cin, buf)) {

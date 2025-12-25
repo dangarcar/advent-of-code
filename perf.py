@@ -1,11 +1,24 @@
 """
-Program to track the time it takes to solve all AoC part 2 of 2023 and 2024
+Program to track the time it takes to solve all AoC part 2s
 """
 
 import os
 import subprocess
 import time
-from functools import reduce
+import concurrent.futures as cf
+
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 
 def getPrograms(year):
     prefix = str(year) + '/'
@@ -33,6 +46,15 @@ def getPrograms(year):
     return days
 
 
+def run_cmd(cmd, day, year):
+    result = subprocess.run(
+        cmd,
+        shell=True,
+        capture_output=True,
+        text=True,
+    )
+    return result.stderr, day, year
+
 
 def main():
     #days = getPrograms(2023) + getPrograms(2024) + getPrograms(2025)
@@ -40,40 +62,65 @@ def main():
 
     days.sort(key=lambda x: (x['year'], x['input']))    
 
+    print(bcolors.HEADER + "\n\n-----COMPILATION-----\n" + bcolors.ENDC)
+    times_file = "times.txt"
+    commands = []
     for e in days:
-        i = e['exe'].split('/')[0]
         prefix = str(e['year']) + '/'
-        x = subprocess.getoutput(f'g++ -std=c++20 -O2 {prefix + e['cpp']} -o {prefix + e['exe']}')
-        if x != "":
-            print("ERROR IN DAY " + i)
-            print(x)
-        else:
-            print(f"DAY {i} {e['year']} COMPILED")
+        commands.append((
+            f'g++ -std=c++20 -DOUT_FILE=\'"{times_file}"\' -DYEAR={e['year']} -DDAY={e['day']} -O2 {prefix + e['cpp']} -o {prefix + e['exe']}',
+            e['day'],
+            e['year']
+        ))
+        
+    with cf.ThreadPoolExecutor(max_workers=len(commands)) as pool:
+        futures = [pool.submit(run_cmd, cmd, day, year) for cmd, day, year in commands]
 
-    t = []
+        for future in cf.as_completed(futures):
+            err, day, year = future.result()
+            if err:
+                print(bcolors.FAIL + f'ERROR IN DAY {day} {year}' + bcolors.ENDC)
+                print(bcolors.WARNING + err + bcolors.ENDC)
+            else:
+                print(bcolors.OKGREEN + f'DAY {day} {year} COMPILED' + bcolors.ENDC)
+
+
+    print(bcolors.HEADER + "\n\n------EXECUTION------\n" + bcolors.ENDC)
+    outs = []
     for e in days:
         i = e['exe'].split('/')[0]
         prefix = str(e['year']) + '/'
-        start = time.time()
         x = subprocess.getoutput(f'./{prefix + e['exe']} < {prefix + e['input']}')
-        dt = time.time() - start
-        t.append({
-            'time': dt, 
-            'year': e['year'],
-            'day': e['day']
-        })
-        print(f"DAY {i}: {"{:.2f}".format(1000*dt)}ms")
-        print(x)
-        print()
+        outs.append(x)
         os.remove(prefix + e['exe'])
 
+
+    total = 0
+    t = []
+    with open(times_file) as file:
+        for i, entry in enumerate(file):
+            nums = entry.split()
+            e = {
+                'day': nums[0],
+                'year': nums[1],
+                'time': int(nums[2])
+            }
+
+            total += e['time']
+            t.append(e)
+
+            print(bcolors.BOLD + f'Day {e['day']} {e['year']}: {"{:.2f}".format(e['time']/1000)}ms' + bcolors.ENDC)
+            print(outs[i])
+            print()
     
-    total = reduce(lambda x,y: x + y['time'], t, 0.0)
-    print(f'\n\nTotal: {"{:.2f}".format(1000*total)}ms')
+    os.remove(times_file)
+
+
+    print(bcolors.HEADER + f'\n\nTOTAL TIME: {"{:.2f}".format(total/1000)}ms' + bcolors.ENDC)
     t.sort(reverse=True, key=lambda x: x['time'])
     for i, e in enumerate(t):
-        if(e['time'] > 0.01):
-            print(f'{"{:01}".format(i+1)}º: {e['year']} day {e['day']} -> {"{:05.2f}".format(100*e['time']/total)}%\t\t{"{:.2f}".format(1000*e['time'])}ms')
+        if(e['time'] > 1000):
+            print(bcolors.OKBLUE + f'{"{:01}".format(i+1)}º: {e['year']} day {e['day']} -> {"{:05.2f}".format(100*e['time']/total)}%\t\t{"{:.2f}".format(e['time']/1000)}ms' + bcolors.ENDC)
         
 
 if __name__ == "__main__":

@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 #define int long long
 
@@ -130,7 +129,7 @@ int solve(const Test& t) {
 }
 
 signed main() {
-    auto t = chrono::system_clock::now();
+    AoCTimer timer;
 
     string buf;    
     vector<Test> tests;
@@ -181,7 +180,6 @@ signed main() {
     }
 
     cout << "Part 2 answer: " << ans << '\n';
-    cout << chrono::duration_cast<chrono::microseconds>(chrono::system_clock::now() - t) << '\n'; 
 
     return 0;
 }

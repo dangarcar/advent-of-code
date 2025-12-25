@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 #define int long long
 
@@ -59,6 +58,8 @@ bool reach(int u, int dst) {
 
 
 signed main() {
+    AoCTimer timer;
+
     string buf;
     int id = 0;
 

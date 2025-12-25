@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 #define int long long
 
@@ -8,6 +7,8 @@ int incI[] = {-1, -1, -1, 0, 0, 1, 1, 1};
 int incJ[] = {-1, 0, 1, -1, 1, -1, 0, 1};
 
 signed main() {
+    AoCTimer timer;
+
     vector<string> board;
     string s;
     while(getline(cin, s)) {

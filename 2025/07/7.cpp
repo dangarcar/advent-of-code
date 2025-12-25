@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 #define int long long
 
@@ -28,6 +27,8 @@ int solve(int i, int j) {
 }
 
 signed main() {
+    AoCTimer timer; 
+
     string buf;
     while(getline(cin, buf)) {
         board.push_back(buf);

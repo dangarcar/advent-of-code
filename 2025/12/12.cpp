@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 #define int long long
 
@@ -7,6 +6,8 @@ using namespace std;
 //WHY DOES THIS WORK?????
 
 signed main() {
+    AoCTimer timer;
+
     vector<vector<string>> bs;
     vector<int> areas;
     string buf;

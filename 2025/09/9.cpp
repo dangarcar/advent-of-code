@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 #define int long long
 
@@ -23,7 +22,7 @@ void floodFill(int i, int j) {
 }
 
 signed main() {
-    //auto s = chrono::system_clock::now();
+    AoCTimer timer;
 
     string buf;
     vector<Point> v;
@@ -115,7 +114,6 @@ signed main() {
 
 
     cout << "Part 2 answer: " << ans << '\n';
-    //cout << chrono::duration_cast<chrono::microseconds>(chrono::system_clock::now() - s) << '\n';
 
     return 0;
 }

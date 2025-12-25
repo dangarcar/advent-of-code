@@ -1,11 +1,12 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 #define int long long
 #define T 12
 
 
 signed main() {
+    AoCTimer timer;
+
     string s;
     int ans = 0;
     while(getline(cin, s)) {

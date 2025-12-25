@@ -1,9 +1,10 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../../AOC.h"
 
 #define int long long
 
 signed main() {
+    AoCTimer timer; 
+
     int ans = 0;    
     while(cin) {
         int a, b;
