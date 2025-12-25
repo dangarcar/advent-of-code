@@ -1,8 +1,6 @@
 #include "../../AOC.h"
 
 
-
-
 struct Point { int x, y; };
 vector<string> board;
 int n, m;
@@ -37,13 +35,12 @@ signed main() {
 
 
     vector<int> sx, sy;
-    sx.push_back(0); sy.push_back(0);
     for(int i=0; i<v.size(); ++i) {
         sx.push_back(v[i].x);
         sy.push_back(v[i].y);
     }
     
-    unordered_set<int> usx, usy;
+    set<int> usx, usy;
     for(auto x: sx) 
         usx.insert(x);
     sx.assign(usx.begin(), usx.end());
@@ -93,6 +90,10 @@ signed main() {
             int x11 = min(v[ii].x, v[jj].x), x22 = max(v[ii].x, v[jj].x);
             int y11 = min(v[ii].y, v[jj].y), y22 = max(v[ii].y, v[jj].y);
             
+            int ar = (x22-x11+1) * (y22-y11+1);
+            if(ans >= ar)
+                continue;
+
             auto x1 = lower_bound(sx.begin(), sx.end(), x11) - sx.begin();
             auto x2 = lower_bound(sx.begin(), sx.end(), x22) - sx.begin();
             auto y1 = lower_bound(sy.begin(), sy.end(), y11) - sy.begin();
@@ -100,14 +101,14 @@ signed main() {
 
             bool holes = false;
             for(int i=y1; i<=y2; ++i)
-                for(int j=x1; j<=x2; ++j)
-                    if(board[i][j] == '.') {
-                        holes = true;
-                        break;
-                    }
+                if(board[i][x1] == '.' || board[i][x2] == '.')
+                    holes = true;
+
+            for(int j=x1; j<=x2; ++j)
+                if(board[y1][j] == '.' || board[y2][j] == '.')
+                    holes = true;
             
-            int ar = (x22-x11+1) * (y22-y11+1);
-            if(holes == false && ans < ar)
+            if(holes == false)
                 ans = ar;
         }
     }
