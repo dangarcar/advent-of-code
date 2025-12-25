@@ -13,3 +13,6 @@ I haven't uploaded the inputs as mentioned in the [AoC web](https://adventofcode
 
 ## 2024
 ![Image of all the problems done in my account in 2024](2024/done.png)
+
+## 2025
+![Image of all the problems done in my account in 2025](2025/done.png)
