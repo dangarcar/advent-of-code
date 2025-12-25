@@ -15,7 +15,7 @@ If in every folder of every problem there is an input file with the name of the 
 
 Every program is compiled with `-O2` and the time measured is execution time, not launch program time, with the `AOC.h` utility that I made 
 
-#### My results
+### My results
 With my Ubuntu WSL2 32gb ram 13th gen i7 machine the sum of the execution times of every program is consistently under 1.4 seconds, but I think this might be improved in under a second for the future
 
 ![Screenshot of the result of the perf.py script](times.png)
