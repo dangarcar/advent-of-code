@@ -134,8 +134,6 @@ signed main() {
         nums.push_back(stoi(string(buf.begin(), buf.end()-1)));
     }
 
-    auto start = chrono::steady_clock::now();
-
     calculateNumpadPaths();
     calculateKbPaths();
 
@@ -158,8 +156,6 @@ signed main() {
     }
 
     cout << "Part 2 answer: " << ans << endl;
-    //auto dt = chrono::duration_cast<chrono::microseconds>(chrono::steady_clock::now() - start);
-    //printf("\n%ld\n%.03fms\n", ans, dt.count() / 1000.0);
 
     return 0;
 }

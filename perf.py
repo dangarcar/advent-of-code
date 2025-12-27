@@ -36,7 +36,7 @@ def getPrograms(year):
                 "cpp": cpp,
                 "input": cpp.replace('.cpp', '.in'),
                 "exe": cpp.replace('.cpp', ''),
-                "day": i
+                "day": i,
             }
 
             days.append(day)
@@ -74,6 +74,7 @@ def main():
             e['year']
         ))
         
+        
     with cf.ThreadPoolExecutor() as pool:
         futures = [pool.submit(run_cmd, cmd, day, year) for cmd, day, year in commands]
 
@@ -87,12 +88,9 @@ def main():
 
 
     print(bcolors.HEADER + "\n\n------EXECUTION------\n" + bcolors.ENDC)
-    outs = []
     for e in days:
-        i = e['exe'].split('/')[0]
         prefix = str(e['year']) + '/'
-        x = subprocess.getoutput(f'./{prefix + e['exe']} < {prefix + e['input']}')
-        outs.append(x)
+        subprocess.run(f'./{prefix + e['exe']} < {prefix + e['input']}', shell=True, text=True, capture_output=True)
         os.remove(prefix + e['exe'])
 
 
@@ -100,18 +98,19 @@ def main():
     t = []
     with open(times_file) as file:
         for i, entry in enumerate(file):
-            nums = entry.split()
+            nums = entry.split(';')
             e = {
                 'day': nums[0],
                 'year': nums[1],
-                'time': int(nums[2])
+                'time': int(nums[2]),
+                'out': nums[3]
             }
 
             total += e['time']
             t.append(e)
 
             print(bcolors.BOLD + f'Day {e['day']} {e['year']}: {"{:.2f}".format(e['time']/1000)}ms' + bcolors.ENDC)
-            print(outs[i])
+            print(e['out'])
             print()
     
     os.remove(times_file)

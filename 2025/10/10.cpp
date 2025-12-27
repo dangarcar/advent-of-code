@@ -1,7 +1,6 @@
 #include "../../AOC.h"
 
 
-
 struct Test {
     vector<vector<int>> moves;
     vector<int> reqs;
@@ -9,55 +8,27 @@ struct Test {
     vector<vector<double>> extended;
 };  
 
-constexpr double EPS = 1e-5;
+constexpr double EPS = 1e-4;
 
-vector<vector<double>> A;
+vector<vector<int>> A;
 int n, m;
+int ans = 1e9;
 
-void print(int well) {
-    for(int i=0; i<A.size(); ++i) {
-        int color = 39;
-        if(i < well) color = 32;
-        if(i == well) color = 34;
 
-        for(auto n: A[i]) {
-            cout << format("\033[{}m{:+02.2f} ", color, n);
-        }
-        cout << '\n';
-    }
-    cout << endl;
+bool isInteger(double b) {
+    return abs(b - (int)b) < EPS || abs(b - (int)b) > 1-EPS;
 }
 
-bool isZero(double d) {
-    return -EPS < d && d < EPS;
-}
+int totalCases = 0, correctCases = 0;
 
+int sub(int i, vector<int>& sol, int sum, const int top) {
+    if(i < 0)
+        return sum;
 
-int sub(int i, vector<int>& sol, const int top) {
-    if(i < 0) {
-        auto a = 0;
-        for(auto e: sol)
-            a += e;        
-
-        bool local=false;
-        for(auto r: A) {
-            double a = 0;
-            for(int j=0; j<A[0].size()-1; ++j)
-                a += r[j] * sol[j];
-
-            if(abs(a - r.back()) > EPS)
-                local = true;
-        }
-
-        if(local) 
-            return 1e9;
-
-        return a;
-    }
 
     int jc = -1, lib = 0;
     for(int j=0; j<sol.size(); ++j) {
-        if(isZero(A[i][j])) 
+        if(A[i][j] == 0) 
             continue;
 
         if(sol[j] == -1) {
@@ -66,32 +37,40 @@ int sub(int i, vector<int>& sol, const int top) {
         }
     }
 
-    int ans = 1e9;
     if(lib == 0) {
-        ans = min(ans, sub(i-1, sol, top));
-    } else if(lib == 1) {
-        double a = 0;
+        int a = 0;
         for(int j=0; j<sol.size(); ++j) {
-            if(j != jc && !isZero(A[i][j])) {
-                assert(sol[j] != -1);
+            if(A[i][j] != 0 && sol[j] != -1)
                 a += sol[j] * A[i][j];
-            }
+        } 
+
+        if(a == A[i].back())
+            ans = min(ans, sub(i-1, sol, sum, top));
+    } else if(lib == 1) {
+        int a = 0;
+        for(int j=0; j<sol.size(); ++j) {
+            if(j != jc && A[i][j] != 0)
+                a += sol[j] * A[i][j];
         } 
 
         auto b = (A[i][sol.size()] - a) / A[i][jc];
-        bool integer = abs(b - (int)b) < EPS || abs(b - (int)b) > 1-EPS;
-        if(integer && b > -EPS) {
-            sol[jc] = round(b);
+        auto bmod = (A[i][sol.size()] - a) % A[i][jc];
+        if(bmod == 0 && b >= 0) {
+            sol[jc] = b;
 
-            ans = min(ans, sub(i-1, sol, top));
+            if(sum + sol[jc] < ans)
+                ans = min(ans, sub(i-1, sol, sum + sol[jc], top));
 
             sol[jc] = -1;
         }
     } else if(lib > 1) {
         for(int a=0; a<=top; ++a) {
+            if(sum + a >= ans)
+                break;
+            
             sol[jc] = a;
 
-            ans = min(ans, sub(i, sol, top));
+            ans = min(ans, sub(i, sol, sum + a, top));
 
             sol[jc] = -1;
         }
@@ -103,27 +82,36 @@ int sub(int i, vector<int>& sol, const int top) {
 }
 
 
-
-int solve(const Test& t) {
-    A = t.extended;
+int solve(Test& t) {
+    auto& B = t.extended;
     
-    n = A.size(), m = A[0].size();
+    n = B.size(), m = B[0].size();
+    int mult = 1;
     for(int k=0; k<n; ++k) {
-        sort(A.begin()+k, A.end(), [k](auto& a, auto& b) { return abs(a[k]) > abs(b[k]); });
+        sort(B.begin()+k, B.end(), [k](auto& a, auto& b) { return abs(a[k]) > abs(b[k]); });
     
         for(int i=k+1; i<n; ++i) {
-            if(A[i][k] == 0) continue;
+            if(B[i][k] == 0) continue;
 
-            auto c = A[i][k] / A[k][k];
+            auto c = B[i][k] / B[k][k];
             for(int j=k; j<m; ++j)
-                A[i][j] -= c*A[k][j];
+                B[i][j] -= c*B[k][j];
+
+            int a = 1;
+            while(isInteger(c*a) == false)
+                a++;
+            mult *= a;
         }
     }
-    
-    //print(-1);
+
+    A.assign(n, vector<int>(m));
+    for(int i=0; i<n; ++i)
+        for(int j=0; j<m; ++j)
+            A[i][j] = round(mult * B[i][j]);
 
     vector<int> sol(t.moves.size(), -1);
-    int ans = sub(n-1, sol, *max_element(t.reqs.begin(), t.reqs.end()));
+    ans = 1e9;
+    sub(n-1, sol, 0, *max_element(t.reqs.begin(), t.reqs.end()));
 
     return ans;
 }
@@ -173,10 +161,6 @@ signed main() {
     int ans = 0;
     for(int i=0; i<tests.size(); ++i) {
         int a = solve(tests[i]);
-
-        if(a == 1e9 || a < 0) {
-            cout << (i+1) << endl;
-        }
         ans += a;
     }
 
