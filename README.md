@@ -9,15 +9,18 @@ When a day has two solutions is because the part 1 and part 2 solutions are very
 I haven't uploaded the inputs as mentioned in the [AoC web](https://adventofcode.com/2023/about)
 
 ## Performance
-I've tried to make them run as fast as possible, so there is the script called perf.py that compiles everything and runs it.
+I've tried to make them run as fast as possible, so there is the script called `perf.py` that compiles everything and runs it.
 
 If in every folder of every problem there is an input file with the name of the program, for example `1.in` for day 1 of any year, in linux you could run the script given that you have g++ with C++20 and Python.
 
 Every program is compiled with `-O2` and the time measured is execution time, not launch program time, with the `AOC.h` utility that I made 
 
-### My results
-With my Ubuntu WSL2 32gb ram 13th gen i7 machine the sum of the execution times of every program is consistently under 1.4 seconds, but I think this might be improved in under a second for the future
+There is also a new option in the `perf.py` script: `--profiled`, that makes use of the `-fprofile-generate` and `-fprofile-use` options of the g++ compiler, but since the profiling is made with the real problem input, I don't know if that could be considered cheating in some sort of way. Anyways I've created that option since it reduces the time a lot on some branch-heavy, low-memory days, like day 10 2025
 
+### My results
+With my Ubuntu WSL2 32gb ram 13th gen i7 machine the sum of the execution times of every program is consistently under 1.2 seconds, getting under a second with profiling enabled
+
+![Screenshot of the result of the perf.py script with the --profiled option](times_profiled.png)
 ![Screenshot of the result of the perf.py script](times.png)
 
 ## 2023
