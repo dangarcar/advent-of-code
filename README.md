@@ -20,7 +20,9 @@ There is also a new option in the `perf.py` script: `--profiled`, that makes use
 ### My results
 With my Ubuntu WSL2 32gb ram 13th gen i7 machine the sum of the execution times of every program is consistently under 1.2 seconds, getting under a second with profiling enabled
 
+#### With --profiled
 ![Screenshot of the result of the perf.py script with the --profiled option](times_profiled.png)
+#### Without profiling
 ![Screenshot of the result of the perf.py script](times.png)
 
 ## 2023
