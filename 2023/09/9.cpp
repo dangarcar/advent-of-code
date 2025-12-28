@@ -17,8 +17,8 @@ long next(vector<long> seq) {
     return *seq.rbegin() + next(dv);
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string str;
     long ans = 0;

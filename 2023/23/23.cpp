@@ -45,8 +45,8 @@ void findAdj(int oi, int oj, int i, int j, int v, int l) {
     }
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
         
     string str;
     while(getline(cin, str)) {

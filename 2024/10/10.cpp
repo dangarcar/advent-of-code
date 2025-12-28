@@ -42,8 +42,8 @@ bool dfs(int i, int j) {
     return ret;
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string buf;
     while(getline(cin, buf)) {

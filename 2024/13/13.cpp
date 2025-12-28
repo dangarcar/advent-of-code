@@ -29,8 +29,8 @@ long determin(mat2 m) {
     return m.a11*m.a22 - m.a12*m.a21;
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string buf;
     long ans = 0;

@@ -36,8 +36,8 @@ int findXmas(const vector<string>& board, bool reverse) {
     return ans;
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string buf;
     vector<string> board, boardTransposed;

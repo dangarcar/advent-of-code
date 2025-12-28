@@ -2,8 +2,8 @@
 
 //WHY DOES THIS WORK?????
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
 
     vector<vector<string>> bs;
     vector<int> areas;

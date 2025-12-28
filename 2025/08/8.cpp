@@ -31,8 +31,8 @@ struct ufds {
 };
 
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
 
     string buf;
     vector<Point> points;

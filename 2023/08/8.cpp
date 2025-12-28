@@ -11,8 +11,8 @@ long gcd(long a, long b) {
     }
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string way;
     cin >> way;

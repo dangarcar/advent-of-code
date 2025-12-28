@@ -11,8 +11,8 @@ long HASH(const string& s) {
     return a;
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string str;
     getline(cin, str);

@@ -18,8 +18,8 @@ int findXmas(const string& s) {
     return ans;
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string buf;
     vector<string> board, boardTransposed, boardD1, boardD2;

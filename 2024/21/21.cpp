@@ -121,8 +121,8 @@ long solve(string s, int depth) {
     return cache[depth-1][s] = ans;
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string buf;
     vector<string> input;

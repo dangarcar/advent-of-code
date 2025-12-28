@@ -21,8 +21,8 @@ long solve(const string& s) {
     return ret;
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string buf;
     getline(cin, buf);

@@ -33,8 +33,8 @@ int solve(const Test& t) {
     return -1;
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string buf;    
     vector<Test> tests;

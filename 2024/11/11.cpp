@@ -71,8 +71,8 @@ long solve(string e, int t) {
     return cache[t][e] = solve(multiply(e, "2024"), t - 1);
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     int a;
     vector<int> nums;

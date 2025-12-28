@@ -4,8 +4,8 @@
 int incI[] = {-1, -1, -1, 0, 0, 1, 1, 1};
 int incJ[] = {-1, 0, 1, -1, 1, -1, 0, 1};
 
-signed main() {    
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {    
+    AoCTimer timer(argc, argv);
 
     vector<string> board;
     string s;

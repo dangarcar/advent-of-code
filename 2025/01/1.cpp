@@ -1,8 +1,8 @@
 #include "../../AOC.h"
 
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
 
     int dial = 50, ans = 0;
     char c;

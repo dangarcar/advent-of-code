@@ -30,8 +30,8 @@ long distance(int u, int v) {
     return idst + jdst;
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     vector<string> board;
     string buf;

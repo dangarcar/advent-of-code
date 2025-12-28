@@ -18,8 +18,8 @@ long multiply(const std::string& str) {
         return 0;
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string buf;
     long ans = 0;

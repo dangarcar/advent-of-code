@@ -4,8 +4,8 @@ struct file {
     int start, size;
 };
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string buf;
     cin >> buf;

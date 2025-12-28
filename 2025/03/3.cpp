@@ -3,8 +3,8 @@
 #define T 12
 
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
 
     string s;
     int ans = 0;

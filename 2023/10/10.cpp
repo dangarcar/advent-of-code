@@ -43,8 +43,8 @@ void fill(int r, int c, char ch) {
     }
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     vector<string> board;
     string buf;

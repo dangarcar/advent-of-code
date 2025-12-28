@@ -67,8 +67,8 @@ long solve(const string& prog, int i, long a) {
     return -1;
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
         
     string prog;
     long a, b, c;

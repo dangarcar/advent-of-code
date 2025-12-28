@@ -11,8 +11,8 @@ ostream& operator<<(ostream& os, const vec2& v) {
 
 int ny = 103, nx = 101;
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string buf;
     vector<vec2> pos;

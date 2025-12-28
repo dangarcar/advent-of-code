@@ -29,8 +29,8 @@ int path(const set<pair<int,int>>& bytes, int n) {
     return dist[n-1][n-1];
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     int n = 71;
     vector<pair<int,int>> bytes;

@@ -5,9 +5,11 @@ using namespace std;
 
 class AoCTimer {
 public:
-    AoCTimer() {
+    __attribute__((no_profile_instrument_function, cold, noinline))
+    AoCTimer(signed argc, char* argv[]) {
 #ifdef OUT_FILE
-        file = fopen(OUT_FILE, "a");
+        assert(argc == 2);
+        file = fopen(argv[1], "a");
         cout.rdbuf(oss.rdbuf());
 #endif
 
@@ -15,6 +17,7 @@ public:
     }
     
 
+    __attribute__((no_profile_instrument_function, cold, noinline))
     ~AoCTimer() {
         end = chrono::system_clock::now();
         auto time = chrono::duration_cast<chrono::microseconds>(end - start).count();

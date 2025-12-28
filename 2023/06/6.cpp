@@ -11,8 +11,8 @@
     ans = t - j1*2 +1
 */
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string str;
     

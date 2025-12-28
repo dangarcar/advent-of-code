@@ -11,8 +11,8 @@ map<char, vector<pair<int,int>>> dirs = {
     {'.', {}}
 };
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     vector<string> board;
     string buf;

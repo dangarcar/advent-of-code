@@ -106,8 +106,8 @@ bool operator<(const Hand& a, const Hand& b) {
     return true;
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string hand; 
     int bid;

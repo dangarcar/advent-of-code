@@ -23,8 +23,8 @@ bool possible(long last, int i, int n) {
     return a || b || c;
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string buf;
     long ans = 0;

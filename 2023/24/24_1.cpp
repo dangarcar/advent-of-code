@@ -25,8 +25,8 @@ pair<long double, long double> intersection(Line l1, Line l2) {
 
 long double L = 200000000000000.0L, R = 400000000000000.0L;
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string str;
     vector<Line> lines;

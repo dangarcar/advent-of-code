@@ -69,8 +69,8 @@ long cycle(vector<string>& board) {
     return total;
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     vector<string> board;
     string str;

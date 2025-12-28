@@ -50,8 +50,8 @@ bool accepted(const string& insName, const Entry& e) {
     return accepted(next, e);
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     vector<Entry> entries;
 

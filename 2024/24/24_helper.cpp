@@ -101,8 +101,8 @@ void printOP(op o) {
     cout << format("{}:{} {} {}:{} -> {}:{}\n", aliases[o.a], o.a,  o.op, aliases[o.b], o.b, aliases[o.c], o.c);
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string buf;
     x = 0; 

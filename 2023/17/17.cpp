@@ -31,8 +31,8 @@ int operator<=>(const info& a, const info& b) {
     return a.first - b.first;
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string str;
     while(getline(cin, str)) {

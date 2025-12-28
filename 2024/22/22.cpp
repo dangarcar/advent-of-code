@@ -21,8 +21,8 @@ bitset<MAX_HASH> b;
 vector<vector<int>> seq;
 vector<vector<int>> diff;
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     int a;
     while(cin >> a) {

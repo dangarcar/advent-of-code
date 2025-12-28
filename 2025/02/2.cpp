@@ -2,8 +2,8 @@
 
 
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
 
     int ans = 0;    
     while(cin) {

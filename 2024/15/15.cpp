@@ -49,8 +49,8 @@ void move(int i, int j, int k) {
     board[i][j] = '.';
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string buf;
     while(getline(cin, buf)) {

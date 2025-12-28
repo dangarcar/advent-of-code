@@ -117,8 +117,8 @@ void swapOuts(const string& xs, const string& ys) {
     swap(x, y);
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string buf;
     x = 0; 

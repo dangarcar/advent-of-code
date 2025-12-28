@@ -17,8 +17,8 @@ bool isOver(const Brick& a, const Brick& b) {
     return a.z1-1 == b.z2;
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string str;
     while(getline(cin, str)) {

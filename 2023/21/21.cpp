@@ -15,8 +15,8 @@ int incC[] = {0,0,-1,1};
 
 vector<string> board;
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string str;
     while(getline(cin, str)) {

@@ -11,8 +11,8 @@ bool compatible(const vector<int>& a, const vector<int>& b) {
     return true;
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string buf;
     vector<vector<int>> keys, locks;

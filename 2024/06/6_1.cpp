@@ -38,8 +38,8 @@ int pathLenght() {
     return -1;
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string buf;
     while(getline(cin, buf)) {

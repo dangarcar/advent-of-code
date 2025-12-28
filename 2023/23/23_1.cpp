@@ -56,8 +56,8 @@ void dfs(int r, int c, set<pair<int,int>> visited, set<pair<int,int>> path) {
     }
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
         
     string str;
     while(getline(cin, str)) {

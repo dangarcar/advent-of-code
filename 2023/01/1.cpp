@@ -4,8 +4,8 @@ string names[] = {
     "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"
 };
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string str;
     int total = 0;

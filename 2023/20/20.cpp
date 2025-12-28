@@ -42,8 +42,8 @@ vector<string> getOutputs(string parent, istringstream& iss) {
     return o;
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     map<string, Node> nodes;
     vector<string> broadcaster;

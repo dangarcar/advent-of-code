@@ -1,7 +1,7 @@
 #include "../../AOC.h"
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     string str;
     int total = 0;

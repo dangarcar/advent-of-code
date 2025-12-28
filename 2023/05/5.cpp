@@ -18,8 +18,8 @@ vector<pair<long,long>> getSeeds() {
     return seeds;
 }
 
-signed main() {
-    AoCTimer timer;
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
     
     cin.tie(NULL);
     ios::sync_with_stdio(false);
