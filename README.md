@@ -26,8 +26,10 @@ With my Ubuntu 24 WSL2 32gb ram 13th gen i7 machine the sum of the execution tim
 ![Screenshot of the result of the perf.py script](times.png)
 
 I've also run the script in an old laptop with Ubuntu 22 WSL2 installed and this are the results:
-![Screenshot of the result of the perf.py script with the --profiled option in the laptop](laptop_profiled.png)
-![Screenshot of the result of the perf.py script in the laptop](laptop_times.png)
+
+With `--profiled`          |  Without profiling
+:-------------------------:|:-------------------------:
+![](laptop_profiled.png)   |  ![](laptop_times.png)
 
 
 ## 2023
