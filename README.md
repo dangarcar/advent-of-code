@@ -18,12 +18,17 @@ Every program is compiled with `-O2` and the time measured is execution time, no
 There is also a new option in the `perf.py` script: `--profiled`, that makes use of the `-fprofile-generate` and `-fprofile-use` options of the g++ compiler, but since the profiling is made with the real problem input, I don't know if that could be considered cheating in some sort of way. Anyways I've created that option since it reduces the time a lot on some branch-heavy, low-memory days, like day 10 2025
 
 ### My results
-With my Ubuntu WSL2 32gb ram 13th gen i7 machine the sum of the execution times of every program is consistently under 1.2 seconds, getting under a second with profiling enabled
+With my Ubuntu 24 WSL2 32gb ram 13th gen i7 machine the sum of the execution times of every program is consistently **under 1.2 seconds**, getting **under a second** with profiling enabled
 
 #### With --profiled
 ![Screenshot of the result of the perf.py script with the --profiled option](times_profiled.png)
 #### Without profiling
 ![Screenshot of the result of the perf.py script](times.png)
+
+I've also run the script in an old laptop with Ubuntu 22 WSL2 installed and this are the results:
+![Screenshot of the result of the perf.py script with the --profiled option in the laptop](laptop_profiled.png)
+![Screenshot of the result of the perf.py script in the laptop](laptop_times.png)
+
 
 ## 2023
 ![Image of all the problems done in my account in 2023](2023/done.png)
