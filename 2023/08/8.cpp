@@ -1,6 +1,6 @@
 #include "../../AOC.h"
 
-long gcd(long a, long b) {
+int gcd(int a, int b) {
     while(true) {
         if (a == 0) 
             return b;
@@ -42,10 +42,10 @@ signed main(signed argc, char* argv[]) {
             currs.push_back(s);
     }
     //cout << currs.size() << '\n';
-    vector<long> sols;
+    vector<int> sols;
 
     for(auto curr: currs) {
-        long step = 0;
+        int step = 0;
         while(curr[2] != 'Z') {
             char c = way[step%sz];
             if(c == 'R') {
@@ -60,8 +60,8 @@ signed main(signed argc, char* argv[]) {
         sols.push_back(step);
     }
 
-    auto ans = accumulate(sols.begin(), sols.end(), 1L, [](long a, long b){
-        long t = gcd(a, b);
+    auto ans = accumulate(sols.begin(), sols.end(), 1L, [](int a, int b){
+        int t = gcd(a, b);
         return t? (a/t * b) : 0;
     });
 

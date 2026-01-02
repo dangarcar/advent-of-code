@@ -62,7 +62,7 @@ signed main(signed argc, char* argv[]) {
         }
     }
 
-    long low = 0, high = 0;
+    int low = 0, high = 0;
     for(int i=0; ; ++i) {
         queue<Info> q;
         for(auto e: broadcaster)

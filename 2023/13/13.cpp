@@ -3,7 +3,7 @@
 signed main(signed argc, char* argv[]) {
     AoCTimer timer(argc, argv);
     
-    long total = 0;
+    int total = 0;
     string str;
     vector<string> v;
     

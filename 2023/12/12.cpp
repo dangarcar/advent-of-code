@@ -1,11 +1,11 @@
 #include "../../AOC.h"
 
 struct Data {
-    long i, cnt, perm;
+    int i, cnt, perm;
 };
 
-long arrangements(const string str, const vector<int>& groups) {
-    map<pair<long, long>, long> m;
+int arrangements(const string str, const vector<int>& groups) {
+    map<pair<int, int>, int> m;
     m[make_pair(0,0)] = 1;
 
     for(auto c: str) {
@@ -34,7 +34,7 @@ long arrangements(const string str, const vector<int>& groups) {
         }
     }
 
-    long ans = 0;
+    int ans = 0;
     for(auto [g, perm]: m) {
         auto [i, cnt] = g;
         if(i == groups.size() || (i == groups.size()-1 && cnt == groups[i])) {
@@ -60,7 +60,7 @@ signed main(signed argc, char* argv[]) {
     string buf;
     int number=0;
 
-    long total = 0;
+    int total = 0;
 
     while(getline(cin, buf)) {
         vector<int> v;

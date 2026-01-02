@@ -1,9 +1,9 @@
 #include "../../AOC.h"
 
-vector<long> v;
-long tgt;
+vector<int> v;
+int tgt;
 
-bool possible(long last, int i, int n) {
+bool possible(int last, int i, int n) {
     if(i == n) {
         return last == tgt;
     }
@@ -11,8 +11,8 @@ bool possible(long last, int i, int n) {
     bool a = possible(last * v[i], i + 1, n);
     bool b = possible(last + v[i], i + 1, n);
     
-    long esp = 1;
-    long t = v[i];
+    int esp = 1;
+    int t = v[i];
     while(t) {
         t /= 10L;
         esp *= 10;
@@ -27,7 +27,7 @@ signed main(signed argc, char* argv[]) {
     AoCTimer timer(argc, argv);
     
     string buf;
-    long ans = 0;
+    int ans = 0;
     while(getline(cin, buf)) {
         if(buf.empty())
             continue;
@@ -37,7 +37,7 @@ signed main(signed argc, char* argv[]) {
         ss >> tgt;
         ss.ignore();
 
-        long a;
+        int a;
         v.clear();
         while(ss >> a) {
             v.push_back(a);

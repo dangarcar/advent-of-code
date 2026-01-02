@@ -1,16 +1,16 @@
 #include "../../AOC.h"
 
 struct range {
-    long s,t, w;
+    int s,t, w;
 };
 
-vector<pair<long,long>> getSeeds() {
-    vector<pair<long,long>> seeds;
+vector<pair<int,int>> getSeeds() {
+    vector<pair<int,int>> seeds;
     string str;
     cin >> str;
     getline(cin, str);
     istringstream iss(str);
-    long a,b;
+    int a,b;
     while(iss >> a >> b) {
         seeds.push_back({a,b});
     }
@@ -37,7 +37,7 @@ signed main(signed argc, char* argv[]) {
             if(str.empty())
                 break;
             
-            long s=0, t=0, w=0;
+            int s=0, t=0, w=0;
             istringstream iss (str);
             iss >> t >> s >> w;
 
@@ -52,9 +52,9 @@ signed main(signed argc, char* argv[]) {
         cout << '\n';
     }*/
 
-    queue<pair<long,long>> q;
-    vector<pair<long,long>> tmp(seeds);
-    long ans = INT64_MAX;
+    queue<pair<int,int>> q;
+    vector<pair<int,int>> tmp(seeds);
+    int ans = INT64_MAX;
     for(int i=0; i<7; ++i) {
         for(auto p: tmp)
             q.push(p);
@@ -68,7 +68,7 @@ signed main(signed argc, char* argv[]) {
 
             bool ended = false;
             for(auto w: maps[i]){
-                long b = w.s, e = w.s+w.w-1;
+                int b = w.s, e = w.s+w.w-1;
                 if(b <= l && e >= r) {
                     auto d = l - b;
                     l = w.t + d;

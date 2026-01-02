@@ -1,8 +1,8 @@
 #include "../../AOC.h"
 
 struct Brick {
-    long x1,y1,z1;
-    long x2,y2,z2;
+    int x1,y1,z1;
+    int x2,y2,z2;
 };
 
 vector<Brick> bricks;
@@ -58,7 +58,7 @@ signed main(signed argc, char* argv[]) {
         }
     }
 
-    long ans = 0;
+    int ans = 0;
     for(int i=0; i<sz; ++i) {
         bool needed = false;
         for(int j=i+1; j<sz; ++j) {

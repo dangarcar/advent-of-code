@@ -1,11 +1,11 @@
 #include "../../AOC.h"
 
-using Entry = array<pair<long,long>, 4>;
+using Entry = array<pair<int,int>, 4>;
 
 struct Instruction {
     char v;
     char sym;
-    long w;
+    int w;
     string next;
 };
 
@@ -17,16 +17,16 @@ struct InstructionSet {
 map<string, InstructionSet> instructions;
 map<char, int> xmas = { {'x', 0}, {'m', 1}, {'a', 2}, {'s', 3} };
 
-long solve(const string& insName, Entry e) {
+int solve(const string& insName, Entry e) {
     if(insName == "A")
-        return accumulate(e.begin(), e.end(), 1L, [](long acc, const auto& r){
-            return acc * max(0L, r.second - r.first +1);
+        return accumulate(e.begin(), e.end(), 1L, [](int acc, const auto& r){
+            return acc * max(0LL, r.second - r.first +1);
         });
     else if(insName == "R")
         return 0L;
 
     const auto& inSet = instructions[insName];
-    long ans = 0L;
+    int ans = 0L;
     for(auto ins: inSet.ins) {
         Entry ne = e;
         auto i = xmas[ins.v];
@@ -56,7 +56,7 @@ signed main(signed argc, char* argv[]) {
         if(str.empty()) break;
 
         char c;
-        istringstream iss(move(str));
+        istringstream iss(std::move(str));
         string name;
         while(iss >> c, c != '{') 
             name += c;
@@ -69,7 +69,7 @@ signed main(signed argc, char* argv[]) {
                 break;
             }
 
-            istringstream tokenizer(move(str));
+            istringstream tokenizer(std::move(str));
             Instruction in;
             in.v = tokenizer.get();
             in.sym = tokenizer.get();
@@ -81,7 +81,7 @@ signed main(signed argc, char* argv[]) {
         }
     }
 
-    long ans = solve("in", Entry {
+    int ans = solve("in", Entry {
         make_pair(1,4000),
         make_pair(1,4000),
         make_pair(1,4000),

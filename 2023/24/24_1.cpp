@@ -1,7 +1,7 @@
 #include "../../AOC.h"
 
 struct Line {
-    long double x,y,z, dx, dy, dz;
+    int double x,y,z, dx, dy, dz;
 };
 
 /*
@@ -11,7 +11,7 @@ y1 + m1x -m1x1 = y2 + m2x - m2x2
 (m1 - m2)x = -y1 + y2 + m1x1 - m2x2
 x = (-y1 + y2 + m1x1 - m2x2)/(m1 - m2)
 */
-pair<long double, long double> intersection(Line l1, Line l2) {
+pair<int double, int double> intersection(Line l1, Line l2) {
     auto m1 = l1.dy/l1.dx, m2 = l2.dy/l2.dx;
 
     if(abs(m1-m2) < FLT_EPSILON)
@@ -23,7 +23,7 @@ pair<long double, long double> intersection(Line l1, Line l2) {
     return make_pair(x, y);
 }
 
-long double L = 200000000000000.0L, R = 400000000000000.0L;
+int double L = 200000000000000.0L, R = 400000000000000.0L;
 
 signed main(signed argc, char* argv[]) {
     AoCTimer timer(argc, argv);
@@ -35,7 +35,7 @@ signed main(signed argc, char* argv[]) {
         if(str.empty()) continue;
         istringstream iss(str);
 
-        long double x,y,z, dx, dy, dz;
+        int double x,y,z, dx, dy, dz;
         char ch;
         iss >> x >> ch >> y >> ch >> z >> ch >> dx >> ch >> dy >> ch >> dz;
         lines.push_back({x, y, z, dx, dy, dz});
@@ -43,7 +43,7 @@ signed main(signed argc, char* argv[]) {
 
     auto sz = lines.size();
 
-    long ans = 0;
+    int ans = 0;
     for(int i=0; i<sz; ++i) {
         for(int j=i+1; j<sz; ++j) {
             if(i==j) continue;

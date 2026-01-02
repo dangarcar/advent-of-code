@@ -1,11 +1,11 @@
 #include "../../AOC.h"
 
 struct vec2 {
-    long x, y;
+    int x, y;
 };
 
 struct mat2 {
-    long a11, a12, a21, a22;
+    int a11, a12, a21, a22;
 };
 
 ostream& operator<<(ostream& os, const vec2& v) {
@@ -13,7 +13,7 @@ ostream& operator<<(ostream& os, const vec2& v) {
     return os;
 }
 
-vec2 operator*(vec2 v, long n) {
+vec2 operator*(vec2 v, int n) {
     return {v.x*n, v.y*n};
 }
 
@@ -25,7 +25,7 @@ bool operator==(vec2 a, vec2 b) {
     return a.x == b.x && a.y == b.y;
 }
 
-long determin(mat2 m) {
+int determin(mat2 m) {
     return m.a11*m.a22 - m.a12*m.a21;
 }
 
@@ -33,7 +33,7 @@ signed main(signed argc, char* argv[]) {
     AoCTimer timer(argc, argv);
     
     string buf;
-    long ans = 0;
+    int ans = 0;
     while(getline(cin, buf)) {
         if(buf.empty()) continue;
         vec2 u, v, w; // a*u +  b*v = w; a,b <= 100
@@ -54,7 +54,7 @@ signed main(signed argc, char* argv[]) {
         w.x += 10000000000000;
         w.y += 10000000000000;
 
-        long a, b;
+        int a, b;
         mat2 mat { 
             u.x, v.x,
             u.y, v.y

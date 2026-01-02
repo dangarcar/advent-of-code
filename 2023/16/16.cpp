@@ -66,8 +66,8 @@ void dfs(int r, int c, Direction d) {
     }
 }
 
-long solve(int r, int c, Direction d) {
-    long ans = 0;
+int solve(int r, int c, Direction d) {
+    int ans = 0;
 
     visited.assign(R, vector<array<bool,4>>(C, {0,0,0,0}));
     dfs(r,c,d);
@@ -108,7 +108,7 @@ signed main(signed argc, char* argv[]) {
         cout << '\n';
     }*/
 
-    long ans = 0;
+    int ans = 0;
     for(int i=0; i<R; ++i) {
         ans = max(ans, solve(i, 0, RIGHT));
         ans = max(ans, solve(i, C-1, LEFT));

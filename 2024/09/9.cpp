@@ -38,9 +38,9 @@ signed main(signed argc, char* argv[]) {
         }
     }
 
-    long ans = 0;
-    for(long i=0; i<ve.size(); ++i) {
-        for(long j=0; j<ve[i].size; ++j) {
+    int ans = 0;
+    for(int i=0; i<ve.size(); ++i) {
+        for(int j=0; j<ve[i].size; ++j) {
             ans += i * (ve[i].start + j);
         }
     }

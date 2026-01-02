@@ -1,11 +1,11 @@
 #include "../../AOC.h"
 
-char run(long a, long b, long c, const string& prog) {
+char run(int a, int b, int c, const string& prog) {
     for(int pc=0; pc<prog.size(); pc += 2) {
-        long ins = prog[pc] - '0';
-        long op = prog[pc+1] - '0';
+        int ins = prog[pc] - '0';
+        int op = prog[pc+1] - '0';
         
-        long comb = op;
+        int comb = op;
         if(comb == 4) comb = a;
         else if(comb == 5) comb = b;
         else if(comb == 6) comb = c;
@@ -51,12 +51,12 @@ char run(long a, long b, long c, const string& prog) {
     return 0;
 }
 
-long solve(const string& prog, int i, long a) {
+int solve(const string& prog, int i, int a) {
     if(i == 0) {
         return a;
     }
 
-    for(long e=8*a; e < 8*(a+1); ++e) {
+    for(int e=8*a; e < 8*(a+1); ++e) {
         if(run(e, 0, 0, prog) == prog[i-1]) {
             auto c = solve(prog, i-1, e);
             if(c != -1)
@@ -71,7 +71,7 @@ signed main(signed argc, char* argv[]) {
     AoCTimer timer(argc, argv);
         
     string prog;
-    long a, b, c;
+    int a, b, c;
     
     {
         string buf;

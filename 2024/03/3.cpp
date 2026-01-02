@@ -1,10 +1,10 @@
 #include "../../AOC.h"
 
 
-long multiply(const std::string& str) {
+int multiply(const std::string& str) {
     stringstream ss;
     ss << str;
-    long a, b;
+    int a, b;
     char c;
     ss >> a >> c >> b;
     
@@ -22,7 +22,7 @@ signed main(signed argc, char* argv[]) {
     AoCTimer timer(argc, argv);
     
     string buf;
-    long ans = 0;
+    int ans = 0;
     bool enable = true;
     
     while(getline(cin, buf)) {

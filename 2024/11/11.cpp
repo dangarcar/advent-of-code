@@ -49,9 +49,9 @@ string multiply(string num1, string num2) {
     return s;
 }
 
-unordered_map<string, long> cache[N+1];
+unordered_map<string, int> cache[N+1];
 
-long solve(string e, int t) {
+int solve(string e, int t) {
     if(t == 0)
         return 1;
 
@@ -79,7 +79,7 @@ signed main(signed argc, char* argv[]) {
     while(cin >> a)
         nums.push_back(a);
 
-    long ans = 0;
+    int ans = 0;
     for(int i=0; i<nums.size(); ++i) {
         ans += solve(to_string(nums[i]), N);
     }

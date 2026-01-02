@@ -20,7 +20,7 @@ struct Info {
 
 string rxParent;
 
-long gcd(long a, long b) {
+int gcd(int a, int b) {
     while(true) {
         if (a == 0) 
             return b;
@@ -78,9 +78,9 @@ signed main(signed argc, char* argv[]) {
 
     //cout << rxParent << '\n';
 
-    long ans = 1;
+    int ans = 1;
     for(auto e: broadcaster) {
-        long l = 0;
+        int l = 0;
 
         while(true) {
             l++;

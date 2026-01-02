@@ -6,7 +6,7 @@ My solution is inspired in this one: https://github.com/villuna/aoc23/wiki/A-Geo
 */
 
 constexpr int STEPS = 26501365;
-constexpr long INF = 1e18;
+constexpr int INF = 1e18;
 
 int R,C;
 
@@ -30,8 +30,8 @@ signed main(signed argc, char* argv[]) {
     for(int i=0; i<R; ++i) {
         for(int j=0; j<C; ++j) {
             if(board[i][j] == 'S') {
-                vector<vector<long>> dist(R, vector<long>(C, INF));
-                queue<pair<long,long>> q;
+                vector<vector<int>> dist(R, vector<int>(C, INF));
+                queue<pair<int,int>> q;
                 dist[i][j] = 0;
                 q.push({i,j});
 
@@ -40,8 +40,8 @@ signed main(signed argc, char* argv[]) {
                         q.pop();
 
                     for(int k=0; k<4; ++k) {
-                        long nr = r + incR[k];
-                        long nc = c + incC[k];
+                        int nr = r + incR[k];
+                        int nc = c + incC[k];
 
                         if(0 <= nr && nr < R
                         && 0 <= nc && nc < C
@@ -53,7 +53,7 @@ signed main(signed argc, char* argv[]) {
                     }
                 }
 
-                long even=0, even_corner=0, odd=0, odd_corner=0;
+                int even=0, even_corner=0, odd=0, odd_corner=0;
                 for(auto v: dist) {
                     for(auto e: v) {
                         if(e == INF) continue;
@@ -67,9 +67,9 @@ signed main(signed argc, char* argv[]) {
                     }
                 }
 
-                long n = STEPS/R;
+                int n = STEPS/R;
                 //cout << n << '\n';
-                long ans = (n+1)*(n+1)*odd + n*n*even - (n+1)*odd_corner + n*even_corner;
+                int ans = (n+1)*(n+1)*odd + n*n*even - (n+1)*odd_corner + n*even_corner;
                 cout << "Part 2 answer: " << ans << '\n';
             }
         }

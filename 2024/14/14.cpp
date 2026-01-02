@@ -61,7 +61,7 @@ signed main(signed argc, char* argv[]) {
     t = ansX;
     while(t < nx*ny) {
         t += nx; // Find in the numbers ansX mod nx
-        long dst = 0;
+        int dst = 0;
         for(int i=0; i<vy.size(); ++i) {
             vy[i].y = ((vy[i].y + vel[i].y*nx) % ny + 2*ny) % ny;
         }

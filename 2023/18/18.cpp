@@ -5,8 +5,8 @@ signed main(signed argc, char* argv[]) {
     
     string str;
 
-    vector<pair<long,long>> coords;
-    long x=0, y=0, l=0;
+    vector<pair<int,int>> coords;
+    int x=0, y=0, l=0;
 
     coords.push_back(make_pair(0,0));
     while(getline(cin, str)) {
@@ -36,7 +36,7 @@ signed main(signed argc, char* argv[]) {
         cout << a << ',' << b << '\n';
     }*/
 
-    long ans = 0;
+    int ans = 0;
     auto sz = coords.size();
     for(int i=1; i<sz; ++i) {
         auto [a,b] = coords[i-1];

@@ -2,7 +2,7 @@
 
 #define SECRETS 2000
 
-long op(long a) {
+int op(int a) {
     a = (a xor (a * 64)) % 16777216;
     a = (a xor (a / 32)) % 16777216;
     a = (a xor (a * 2048)) % 16777216;

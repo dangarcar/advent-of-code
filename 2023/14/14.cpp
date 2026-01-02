@@ -1,6 +1,6 @@
 #include "../../AOC.h"
 
-long cycle(vector<string>& board) {
+int cycle(vector<string>& board) {
     for(int j=0; j<board[0].size(); ++j) {
         for(int i=0; i<board.size(); ++i) {
             if(board[i][j] == 'O') {
@@ -57,7 +57,7 @@ long cycle(vector<string>& board) {
         }
     }
 
-    long total=0;
+    int total=0;
     auto l = board.size();
     for(int i=0; i<l; ++i) {
         for(int j=0; j<board[0].size(); ++j) {
@@ -80,8 +80,8 @@ signed main(signed argc, char* argv[]) {
         board.push_back(str);
     }
 
-    vector<pair<long,int>> c;
-    vector<pair<long,int>> pos;
+    vector<pair<int,int>> c;
+    vector<pair<int,int>> pos;
     for(int t=1; t<=1e9; ++t) {
         auto a = cycle(board);
 
@@ -107,7 +107,7 @@ signed main(signed argc, char* argv[]) {
 
     auto sz = c.size();
     auto mod = 1000000000 % sz;
-    long n = -1;
+    int n = -1;
     for(auto [a,t]: c) {
         if(mod == t%sz) 
             n = a;

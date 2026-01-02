@@ -2,8 +2,8 @@
 
 vector<int> groups;
 
-long arrangements(const string str, string curr) {
-    long ans = 0;
+int arrangements(const string str, string curr) {
+    int ans = 0;
 
     for(int i=curr.size(); i<str.size(); ++i) {
         if(str[i] == '?') {
@@ -50,7 +50,7 @@ signed main(signed argc, char* argv[]) {
     string buf;
     int number=0;
 
-    long total = 0;
+    int total = 0;
 
     while(getline(cin, buf)) {
         groups.clear();

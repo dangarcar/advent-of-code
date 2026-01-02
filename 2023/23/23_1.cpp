@@ -6,7 +6,7 @@ int R,C;
 int incC[] = {0,0,1,-1};
 int incR[] = {1,-1,0,0};
 
-set<long> paths;
+set<int> paths;
 
 void dfs(int r, int c, set<pair<int,int>> visited, set<pair<int,int>> path) {
     if(board[r][c] == '#' || visited.count({r,c})) return;

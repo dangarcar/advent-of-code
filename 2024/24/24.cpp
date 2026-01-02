@@ -8,18 +8,28 @@ struct op {
 unordered_map<string, op> outs;
 unordered_map<string, vector<pair<string, bool>>> ins;
 unordered_map<string, string> aliases;
-long x, y;
+int x, y;
 
 void printOP(op o) {
-    cout << format("{}:{} {} {}:{} -> {}:{}\n", aliases[o.a], o.a,  o.op, aliases[o.b], o.b, aliases[o.c], o.c);
+    char buf[64];
+    snprintf(buf,  64, "%s:%s %s %s:%s -> %s:%s\n", 
+        aliases[o.a].c_str(), o.a.c_str(),  o.op.c_str(), aliases[o.b].c_str(), o.b.c_str(), aliases[o.c].c_str(), o.c.c_str());
+
+    cout << static_cast<const char*>(buf);
+}
+
+string opName(const char* name, int n) {
+    char buf[8];
+    snprintf(buf, 8, "%s%02lld", name, n);
+    return string(buf);
 }
 
 bool alias(int i) {
     string xork, andk;
-    string carryk = aliases[format("CAR{:02}", i-1)];;
+    string carryk = aliases[opName("CAR", i-1)];;
     
     //ALIAS THE XOR AND THE AND
-    for(auto [e, sw]: ins[format("x{:02}", i)]) {
+    for(auto [e, sw]: ins[opName("x", i)]) {
         auto o = outs.at(e);
         if(sw) swap(o.a, o.b);
 
@@ -32,9 +42,9 @@ bool alias(int i) {
     }
 
     assert(!andk.empty() && !xork.empty());
-    aliases[andk] = format("AND{:02}", i);
+    aliases[andk] = opName("AND", i);
     aliases[aliases[andk]] = andk;
-    aliases[xork] = format("XOR{:02}", i);
+    aliases[xork] = opName("XOR", i);
     aliases[aliases[xork]] = xork;
 
     //ALIAS THE INTERMIDIATE CARRY AND THE OUTPUT
@@ -48,7 +58,7 @@ bool alias(int i) {
                     return false;
             } 
             else if(o.op == "AND"){
-                auto a = format("ICR{:02}", i);
+                auto a = opName("ICR", i);
                 aliases[a] = o.c;
                 aliases[o.c] = a;
             } 
@@ -65,8 +75,8 @@ bool alias(int i) {
         auto o = outs.at(ok);
         if(sw) swap(o.a, o.b);
 
-        if(o.op == "OR" && o.b == aliases[format("ICR{:02}", i)]) {
-            auto a = format("CAR{:02}", i);
+        if(o.op == "OR" && o.b == aliases[opName("ICR", i)]) {
+            auto a = opName("CAR", i);
             aliases[o.c] = a;
             aliases[a] = o.c;
         } else 
@@ -80,21 +90,21 @@ bool alias(int i) {
 vector<string> getOuts(int i) {
     vector<string> v;
 
-    auto x = format("x{:02}", i);
+    auto x = opName("x", i);
     for(auto e: ins[x])
         v.push_back(e.first);
 
     if(i != 0) {
-        auto carry = format("CAR{:02}", i-1);
+        auto carry = opName("CAR", i-1);
         for(auto e: ins[aliases[carry]])
             v.push_back(e.first);
 
-        if(aliases.contains(format("CAR{:02}", i)))
-            v.push_back(aliases[format("CAR{:02}", i)]);
+        if(aliases.contains(opName("CAR", i)))
+            v.push_back(aliases[opName("CAR", i)]);
     }
 
-    if(find(v.begin(), v.end(), format("z{:02}",i)) == v.end()) {
-        v.push_back(format("z{:02}",i));
+    if(find(v.begin(), v.end(), opName("z",i)) == v.end()) {
+        v.push_back(opName("z",i));
     }
 
     return v;
@@ -128,9 +138,9 @@ signed main(signed argc, char* argv[]) {
             break;
         int i = (buf[1]-'0')*10 + buf[2]-'0';
         if(buf[0] == 'x')
-            x |= (long(buf[5]-'0') << i);
+            x |= (static_cast<int>(buf[5]-'0') << i);
         if(buf[0] == 'y')
-            y |= (long(buf[5]-'0') << i);
+            y |= (static_cast<int>(buf[5]-'0') << i);
     }
 
     while(getline(cin, buf)) {
@@ -193,13 +203,6 @@ signed main(signed argc, char* argv[]) {
         
         end:;
     }
-
-    /*for(int i=0; i<45; ++i) {
-        for(auto e: getOuts(i, ins, aliases))
-            printOP(outs[e], aliases);
-
-        cout << endl;
-    }*/
 
     sort(changes.begin(), changes.end());
     string ans;

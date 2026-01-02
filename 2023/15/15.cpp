@@ -1,7 +1,7 @@
 #include "../../AOC.h"
 
-long HASH(const string& s) {
-    long a=0; 
+int HASH(const string& s) {
+    int a=0; 
     for(auto c: s) {
         a += c;
         a *= 17;
@@ -18,7 +18,7 @@ signed main(signed argc, char* argv[]) {
     getline(cin, str);
     istringstream iss(str);
 
-    vector<vector<pair<string,long>>> table(256);
+    vector<vector<pair<string,int>>> table(256);
     
     while(getline(iss, str, ',')) {
         if(str.find('=') != str.npos){
@@ -40,7 +40,7 @@ signed main(signed argc, char* argv[]) {
         }
     }
 
-    long ans = 0;
+    int ans = 0;
     for(int i=0; i<256; ++i) {
         auto sz = table[i].size();
         for(int j=0; j<sz; ++j) {

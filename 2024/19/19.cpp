@@ -1,15 +1,15 @@
 #include "../../AOC.h"
 
 vector<string> prefs;
-unordered_map<string, long> cache;
+unordered_map<string, int> cache;
 
-long solve(const string& s) {
+int solve(const string& s) {
     if(s.empty())
         return 1;
     if(cache.count(s))
         return cache.at(s);
 
-    long ret = 0;
+    int ret = 0;
     for(auto& p: prefs) {
         if(s.size() >= p.size() && strncmp(s.c_str(), p.c_str(), p.size()) == 0) {
             string ns(s.begin() + p.size(), s.end());
@@ -41,7 +41,7 @@ signed main(signed argc, char* argv[]) {
         tests.push_back(buf);
     }
 
-    long ans = 0;
+    int ans = 0;
     for(auto& s: tests) {
         //cout << s << ' ' << solve(s) << endl;
 

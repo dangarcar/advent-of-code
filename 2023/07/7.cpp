@@ -117,8 +117,8 @@ signed main(signed argc, char* argv[]) {
         map.insert(make_pair(Hand{hand}, bid));   
     }
 
-    long total=0;
-    long i=1;
+    int total=0;
+    int i=1;
     for(auto [h, b]: map) {
         //cout << h.hand << ' ' << b << '\n';
         total += b*i;

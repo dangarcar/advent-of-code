@@ -22,8 +22,7 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-PROFILE_TEST = "profile_test.txt"
-NUMBER_OF_RUNS = 3
+NUMBER_OF_RUNS = 10
 
 
 def getPrograms(year):
@@ -73,10 +72,10 @@ def compile_run(days, action_msg: str, profiled: bool, gen_prof_data = False):
         prof = '-fprofile-use'
     for e in days:
         prefix = str(e['year']) + '/'
-        defines = f'-DOUT_FILE -DYEAR={e['year']} -DDAY={e['day']}'
+        defines = f"-DOUT_FILE -DYEAR={e['year']} -DDAY={e['day']}"
 
         commands.append((
-            f'g++ -std=c++20 {defines} -O2 {prof} {prefix + e['cpp']} -o {prefix + e['exe']}',
+            f"g++ -std=c++20 {defines} -O2 {prof} {prefix + e['cpp']} -o {prefix + e['exe']}",
             e['day'],
             e['year']
         ))
@@ -87,13 +86,15 @@ def compile_run(days, action_msg: str, profiled: bool, gen_prof_data = False):
         for future in cf.as_completed(futures):
             err, day, year = future.result()
             if err:
-                print(bcolors.FAIL + f'ERROR IN DAY {day} {year}' + bcolors.ENDC)
+                print(bcolors.FAIL + f"ERROR IN DAY {day} {year}" + bcolors.ENDC)
                 print(bcolors.WARNING + err + bcolors.ENDC)
             else:
-                if profiled:
+                if gen_prof_data:
                     prefix = str(year) + '/' + ("%02d" % day) + '/'
-                    subprocess.run(f'./{prefix + str(day)} {PROFILE_TEST} < {prefix + str(day) + '.in'}', shell=True, text=True, capture_output=True)
-                print(bcolors.OKGREEN + f'DAY {day} {year} {action_msg}' + bcolors.ENDC)
+                    e = subprocess.getoutput(f"./{prefix + str(day)} /dev/null < {prefix + str(day)}.in")
+                    print(e)
+                    os.remove(prefix + str(day))
+                print(bcolors.OKGREEN + f"DAY {day} {year} {action_msg}" + bcolors.ENDC)
 
 
 
@@ -105,9 +106,6 @@ def remove_files(days, profiled):
         if profiled:
             os.remove(prefix + e['exe'] + '.gcda')
 
-    if profiled:
-        os.remove(PROFILE_TEST)
-
 
 
 def test_run(days, n):    
@@ -115,7 +113,7 @@ def test_run(days, n):
     open(times_file, 'w').close() # clear file contents
     for e in days:
         prefix = str(e['year']) + '/'
-        subprocess.run(f'./{prefix + e['exe']} {times_file} < {prefix + e['input']}', shell=True, text=True, capture_output=True)
+        subprocess.run(f"./{prefix + e['exe']} {times_file} < {prefix + e['input']}", shell=True, text=True, capture_output=True)
 
     t = []
     with open(times_file) as file:
@@ -150,7 +148,7 @@ def main():
 
     print(bcolors.HEADER + "\n\n------EXECUTION------\n" + bcolors.ENDC)
     times = []
-    with cf.ThreadPoolExecutor() as pool:
+    with cf.ThreadPoolExecutor(max_workers=2) as pool:
         futures = [pool.submit(test_run, days, n+1) for n in range(NUMBER_OF_RUNS)]
         for future in cf.as_completed(futures):
             t, file, n = future.result()
@@ -183,17 +181,17 @@ def main():
     for a, m in zip(avgs, mins):
         total_avg += a['time']
         total_min += m['time']
-        print(bcolors.BOLD + f'Day {e['day']} {e['year']}: {"{:.2f}".format(m['time']/1000)}ms (min)\t\t{"{:.2f}".format(a['time']/1000)}ms (avg)' + bcolors.ENDC)
+        print(bcolors.BOLD + f"Day {a['day']} {a['year']}: {'{:.2f}'.format(m['time']/1000)}ms (min)\t\t{'{:.2f}'.format(a['time']/1000)}ms (avg)" + bcolors.ENDC)
         print(a['out']) 
 
     remove_files(days, profiled)    
 
-    print(bcolors.HEADER + f'\n\nTOTAL TIME:\t\t\t\t{"{:.2f}".format(total_min/1000)}ms (min)\t\t{"{:.2f}".format(total_avg/1000)}ms (avg)' + bcolors.ENDC)
+    print(bcolors.HEADER + f"\n\nTOTAL TIME:\t\t\t\t{'{:.2f}'.format(total_min/1000)}ms (min)\t\t{'{:.2f}'.format(total_avg/1000)}ms (avg)" + bcolors.ENDC)
     ams = list(zip(avgs, mins))
     ams.sort(reverse=True, key=lambda x: x[0]['time'])
     for i, (a, m) in enumerate(ams):
         if(a['time'] > 1000):
-            print(bcolors.OKBLUE + f'{"{:01}".format(i+1)}º: {a['year']} day {a['day']} -> {"{:05.2f}".format(100*a['time']/total_avg)}%\t\t{"{:.2f}".format(m['time']/1000)}ms   \t\t{"{:.2f}".format(a['time']/1000)}ms' + bcolors.ENDC)
+            print(bcolors.OKBLUE + f"{'{:01}'.format(i+1)}º: {a['year']} day {a['day']} -> {'{:05.2f}'.format(100*a['time']/total_avg)}%\t\t{'{:.2f}'.format(m['time']/1000)}ms   \t\t{'{:.2f}'.format(a['time']/1000)}ms" + bcolors.ENDC)
         
 
 if __name__ == "__main__":

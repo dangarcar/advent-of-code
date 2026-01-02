@@ -9,8 +9,8 @@ public:
     AoCTimer(signed argc, char* argv[]) {
 #ifdef OUT_FILE
         assert(argc == 2);
-        file = fopen(argv[1], "a");
-        cout.rdbuf(oss.rdbuf());
+        this->name = string(argv[1]);
+        buf = cout.rdbuf(oss.rdbuf());
 #endif
 
         start = chrono::system_clock::now();
@@ -23,11 +23,14 @@ public:
         auto time = chrono::duration_cast<chrono::microseconds>(end - start).count();
 
 #ifdef OUT_FILE
+        cout.rdbuf(buf);
         string s = oss.str();
         replace(s.begin(), s.end(), '\n', '\t');
 
+        auto file = fopen(this->name.c_str(), "a");
         fprintf(file, "%02d;%d;%ld;%s\n", DAY, YEAR, time, s.c_str());
         fclose(file);
+
 #else
         cout << time << "us" << endl;
 #endif
@@ -38,8 +41,9 @@ private:
     chrono::system_clock::time_point start, end;
 
 #ifdef OUT_FILE
-    FILE* file;
+    string name;
     ostringstream oss;
+    streambuf* buf;
 #endif
 
 };

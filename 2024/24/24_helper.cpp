@@ -8,7 +8,7 @@ struct op {
 map<string, op> outs;
 map<string, vector<op>> ins;
 map<string, string> aliases;
-long x, y;
+int x, y;
 
 bool solve(const string& s) {
     int i = (s[1]-'0')*10 + s[2]-'0';
@@ -112,9 +112,9 @@ signed main(signed argc, char* argv[]) {
             break;
         int i = (buf[1]-'0')*10 + buf[2]-'0';
         if(buf[0] == 'x')
-            x |= (long(buf[5]-'0') << i);
+            x |= (static_cast<int>(buf[5]-'0') << i);
         if(buf[0] == 'y')
-            y |= (long(buf[5]-'0') << i);
+            y |= (static_cast<int>(buf[5]-'0') << i);
     }
 
     while(getline(cin, buf)) {
@@ -160,12 +160,12 @@ signed main(signed argc, char* argv[]) {
         cout << endl;
     }
 
-    long ans = 0;
+    int ans = 0;
     for(auto [u, _]: outs) {
         if(u[0] == 'z') {
             int i = (u[1]-'0')*10 + u[2]-'0';
             //cout << u << ": " << solve(u) << "  " << i << endl;
-            ans |= long(solve(u)) << i;
+            ans |= static_cast<int>(solve(u)) << i;
         }
     }
 

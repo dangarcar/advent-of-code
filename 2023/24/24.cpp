@@ -9,7 +9,7 @@ struct bvec3 {
 };
 
 struct vec3 {
-    long x, y, z;
+    int x, y, z;
 
     operator bvec3() const { 
         return {bigint(x), bigint(y), bigint(z)}; 
@@ -29,11 +29,11 @@ vec3 operator+(vec3 u, vec3 v) {
     return {u.x+v.x, u.y+v.y, u.z+v.z};
 }
 
-vec3 operator*(long k, vec3 u) {
+vec3 operator*(int k, vec3 u) {
     return {u.x*k, u.y*k, u.z*k};
 }
 
-vec3 operator/(vec3 u, long k) {
+vec3 operator/(vec3 u, int k) {
     return {u.x/k, u.y/k, u.z/k};
 }
 
@@ -49,7 +49,9 @@ bigint dot(bvec3 u, bvec3 v) {
     return u.x*v.x + u.y*v.y + u.z*v.z;
 }
 
-signed main(signed argc, char const *argv[]) {
+signed main(signed argc, char* argv[]) {
+    AoCTimer timer(argc, argv);
+
     string str;
     vector<pair<vec3, vec3>> lines;
 
@@ -57,7 +59,7 @@ signed main(signed argc, char const *argv[]) {
         if(str.empty()) continue;
         istringstream iss(str);
 
-        long x, y, z, dx, dy, dz;
+        int x, y, z, dx, dy, dz;
         char ch;
         iss >> x >> ch >> y >> ch >> z >> ch >> dx >> ch >> dy >> ch >> dz;
         lines.push_back({{x, y, z}, {dx, dy, dz}});
@@ -70,8 +72,8 @@ signed main(signed argc, char const *argv[]) {
 
     //cout << p1 << ' ' << v1 << '\n' << p2 << ' ' << v2 << endl;
 
-    long t1 = -dot(cross(p1, p2), v2) / dot(cross(v1, p2), v2);
-    long t2 = -dot(cross(p1, p2), v1) / dot(cross(p1, v2), v1);
+    int t1 = -dot(cross(p1, p2), v2) / dot(cross(v1, p2), v2);
+    int t2 = -dot(cross(p1, p2), v1) / dot(cross(p1, v2), v1);
     //cout << t1 << ' ' << t2 << endl;
 
     vec3 c1 = lines[1].first + t1*lines[1].second;
@@ -79,7 +81,7 @@ signed main(signed argc, char const *argv[]) {
     vec3 v = (c2 - c1) / (t2 - t1);
     vec3 p = c1 - t1*v;
 
-    long ans = p.x + p.y + p.z;
+    int ans = p.x + p.y + p.z;
     //cout << p << ' ' << v << endl;;
     cout << "Part 2 answer: " << ans << '\n';
 

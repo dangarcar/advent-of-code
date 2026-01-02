@@ -5,14 +5,14 @@
 vector<pair<int,int>> pos;
 vector<bool> iEmpty, jEmpty;
 
-long distance(int u, int v) {    
+int distance(int u, int v) {    
     auto [i1, j1] = pos[u];
     auto [i2, j2] = pos[v];
 
     if(i1 > i2) swap(i1, i2);
     if(j1 > j2) swap(j1, j2);
     
-    long idst=0, jdst=0;
+    int idst=0, jdst=0;
     for(int i=i1; i<i2; i++) {
         if(iEmpty[i])
             idst += SCALE;
@@ -56,7 +56,7 @@ signed main(signed argc, char* argv[]) {
         }
     }
 
-    long ans = 0;
+    int ans = 0;
     for(int i=0; i<pos.size(); ++i)
         for(int j=0; j<i; ++j)
             ans += distance(i, j);

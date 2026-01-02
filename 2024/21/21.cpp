@@ -8,7 +8,7 @@ vector<vector<vector<string>>> numpadPaths;
 const char* kb[] = {" ^A", "<v>"};
 vector<vector<vector<string>>> kbPaths;
 
-unordered_map<string, long> cache[INTER];
+unordered_map<string, int> cache[INTER];
 
 vector<string> path(char a, char b){
     int ai = a - '0', bi = b-'0';
@@ -100,17 +100,17 @@ vector<string> kbPath(char a, char b) {
     return kbPaths[kbIndex(a)][kbIndex(b)];
 }
 
-long solve(string s, int depth) {
+int solve(string s, int depth) {
     if(depth == 0)
         return s.size();
 
     if(cache[depth-1].count(s))
         return cache[depth-1][s];
 
-    long ans = 0;
+    int ans = 0;
     char lc = 'A';
     for(auto c: s) {
-        long pos = 1e18;
+        int pos = 1e18;
         for(auto e: kbPath(lc, c))
             pos = min(solve(e, depth-1), pos);
 
@@ -126,7 +126,7 @@ signed main(signed argc, char* argv[]) {
     
     string buf;
     vector<string> input;
-    vector<long> nums;
+    vector<int> nums;
     while(getline(cin, buf)) {
         if(buf.empty()) continue;
 
@@ -137,13 +137,13 @@ signed main(signed argc, char* argv[]) {
     calculateNumpadPaths();
     calculateKbPaths();
 
-    long ans = 0;
+    int ans = 0;
     for(int i=0; i<input.size(); ++i) {
-        long best = 0;
+        int best = 0;
         
         char lc = 'A';
         for(auto c: input[i]) {
-            long pos = 1e18;
+            int pos = 1e18;
             for(const auto e: path(lc, c))
                 pos = min(solve(e, INTER), pos);
 

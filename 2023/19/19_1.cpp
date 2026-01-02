@@ -1,13 +1,13 @@
 #include "../../AOC.h"
 
 struct Entry {
-    long x,m,a,s;
+    int x,m,a,s;
 };
 
 struct Instruction {
     char v;
     char sym;
-    long w;
+    int w;
     string next;
 };
 
@@ -28,7 +28,7 @@ bool accepted(const string& insName, const Entry& e) {
 
     string next;
     for(auto ins: inSet.ins) {
-        long v;
+        int v;
         switch(ins.v) {
             case 'x': v = e.x; break;
             case 'm': v = e.m; break;
@@ -60,7 +60,7 @@ signed main(signed argc, char* argv[]) {
         if(str.empty()) continue;
 
         char c;
-        istringstream iss(move(str));
+        istringstream iss(std::move(str));
         string name;
         while(iss >> c, c != '{') 
             name += c;
@@ -81,7 +81,7 @@ signed main(signed argc, char* argv[]) {
                     break;
                 }
 
-                istringstream tokenizer(move(str));
+                istringstream tokenizer(std::move(str));
                 Instruction in;
                 in.v = tokenizer.get();
                 in.sym = tokenizer.get();
@@ -94,7 +94,7 @@ signed main(signed argc, char* argv[]) {
         }
     }
 
-    long ans = 0;
+    int ans = 0;
     for(const auto& e: entries) {
         if(accepted("in", e))
             ans += e.x + e.m + e.a + e.s;
