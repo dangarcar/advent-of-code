@@ -27,7 +27,7 @@ With my Ubuntu 24 WSL2 32gb ram 13th gen i7 machine the sum of the execution tim
 
 I've also run the script in an old laptop with Ubuntu 22 WSL2 installed and this are the results:
 
-With `--profiled`          |  Without profiling
+With `--profiled` (<2.5 seconds)         |  Without profiling (<3 seconds)
 :-------------------------:|:-------------------------:
 ![](laptop_profiled.png)   |  ![](laptop_times.png)
 
